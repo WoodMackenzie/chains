@@ -8,7 +8,7 @@ Chains::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # Established this root after installing Devise
   # root 'welcome#index'
-    root :to => "home#index"
+  root :to => "processing_units#index"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
