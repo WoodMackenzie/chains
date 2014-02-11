@@ -1,0 +1,29 @@
+<h1>Listing processing_units</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Comment</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @processing_units.each do |processing_unit| %>
+      <tr>
+        <td><%= processing_unit.name %></td>
+        <td><%= processing_unit.comment %></td>
+        <td><%= link_to 'Show', processing_unit %></td>
+        <td><%= link_to 'Edit', edit_processing_unit_path(processing_unit) %></td>
+        <td><%= link_to 'Destroy', processing_unit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Processing unit', new_processing_unit_path %>

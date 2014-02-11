@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @processing_unit.name %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @processing_unit.comment %>
+</p>
+
+<%= link_to 'Edit', edit_processing_unit_path(@processing_unit) %> |
+<%= link_to 'Back', processing_units_path %>
