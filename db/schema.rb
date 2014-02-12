@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140212200150) do
+ActiveRecord::Schema.define(version: 20140212211114) do
 
   create_table "processing_units", force: true do |t|
     t.datetime "created_at"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140212200150) do
     t.integer  "user_id"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "address"
   end
 
   create_table "users", force: true do |t|
