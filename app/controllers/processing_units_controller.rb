@@ -69,6 +69,6 @@ class ProcessingUnitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def processing_unit_params
-      params.require(:processing_unit).permit(:name, :comment)
+      params.require(:processing_unit).permit(:latitude, :longitude)
     end
 end

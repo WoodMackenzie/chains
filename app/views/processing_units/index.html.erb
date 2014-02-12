@@ -3,8 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Comment</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
       <th></th>
       <th></th>
       <th></th>
@@ -14,8 +14,8 @@
   <tbody>
     <% @processing_units.each do |processing_unit| %>
       <tr>
-        <td><%= processing_unit.name %></td>
-        <td><%= processing_unit.comment %></td>
+        <td><%= processing_unit.latitude %></td>
+        <td><%= processing_unit.longitude %></td>
         <td><%= link_to 'Show', processing_unit %></td>
         <td><%= link_to 'Edit', edit_processing_unit_path(processing_unit) %></td>
         <td><%= link_to 'Destroy', processing_unit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
