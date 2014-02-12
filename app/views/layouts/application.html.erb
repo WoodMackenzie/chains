@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
+
+<head> 
   <title>Chains</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 
+<body>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<div class="container">
+					<a class="navbar-brand" href="#">Chains</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+
 <p><class="notice"><%= notice %></p>
 <p><class="alert"><%= alert %></p>
 
-<body>
-
-<%= yield %>
+<div class="container">
+	<%= yield %>
+</div>
 
 </body>
 </html>
