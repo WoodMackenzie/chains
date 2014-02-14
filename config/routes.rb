@@ -1,4 +1,8 @@
 Chains::Application.routes.draw do
+  resources :comments
+
+  resources :names
+
   resources :processing_units
 
   devise_for :users

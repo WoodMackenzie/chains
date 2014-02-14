@@ -1,8 +1,9 @@
-<h1>Listing processing_units</h1>
+<h1>Index of Processing Units</h1>
 
-<table>
+<table class="table table-bordered">
   <thead>
     <tr>
+      <th>Unit Name</th>
       <th>Latitude</th>
       <th>Longitude</th>
       <th></th>
@@ -14,6 +15,11 @@
   <tbody>
     <% @processing_units.each do |processing_unit| %>
       <tr>
+        <td>
+          <% processing_unit.names.each do |name| %>
+            <%= name.name %><br>
+          <% end %>
+        </td>
         <td><%= processing_unit.latitude %></td>
         <td><%= processing_unit.longitude %></td>
         <td><%= link_to 'Show', processing_unit %></td>
@@ -26,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Processing unit', new_processing_unit_path %>
+<a href="/processing_units/new" class="btn btn-default active" role="button">Create New Processing Unit</a>

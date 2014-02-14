@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @name.target_id %>
+</p>
+
+<p>
+  <strong>Target type:</strong>
+  <%= @name.target_type %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @name.user_id %>
+</p>
+
+<p>
+  <strong>Active date:</strong>
+  <%= @name.active_date %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @name.name %>
+</p>
+
+<%= link_to 'Edit', edit_name_path(@name) %> |
+<%= link_to 'Back', names_path %>
