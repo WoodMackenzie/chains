@@ -25,6 +25,7 @@ class ProcessingUnitsController < ApplicationController
   # POST /processing_units.json
   def create
     @processing_unit = ProcessingUnit.new(processing_unit_params)
+    # @processing_unit.user_id = current_user.id
 
     respond_to do |format|
       if @processing_unit.save
@@ -69,6 +70,6 @@ class ProcessingUnitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def processing_unit_params
-      params.require(:processing_unit).permit(:latitude, :longitude, :address)
+      params.require(:processing_unit).permit(:latitude, :longitude, :address, :user_id)
     end
 end

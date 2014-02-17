@@ -4,6 +4,7 @@
   <div class="form-inputs">
     <%= f.input :latitude %>
     <%= f.input :longitude %>
+    <%= f.input :user_id, input_html: { value: current_user.id }, label: current_user.full_name, disabled: true, hint: 'You cannot change your user ID' %>
   </div>
 
   <div class="form-actions">
