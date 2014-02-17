@@ -17,7 +17,7 @@
       <tr>
         <td>
           <% processing_unit.names.each do |name| %>
-            <%= name.name %><br>
+            <%= link_to name.name,  polymorphic_path(name) %><br>
           <% end %>
         </td>
         <td><%= processing_unit.latitude %></td>
