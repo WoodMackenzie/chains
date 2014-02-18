@@ -41,6 +41,7 @@ class ProcessingUnitsController < ApplicationController
   # PATCH/PUT /processing_units/1
   # PATCH/PUT /processing_units/1.json
   def update
+    @processing_unit.user_id = current_user.id
     respond_to do |format|
       if @processing_unit.update(processing_unit_params)
         format.html { redirect_to @processing_unit, notice: 'Processing unit was successfully updated.' }
