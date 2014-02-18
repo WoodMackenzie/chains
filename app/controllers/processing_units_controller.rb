@@ -25,7 +25,7 @@ class ProcessingUnitsController < ApplicationController
   # POST /processing_units.json
   def create
     @processing_unit = ProcessingUnit.new(processing_unit_params)
-    # @processing_unit.user_id = current_user.id
+    @processing_unit.user_id = current_user.id
 
     respond_to do |format|
       if @processing_unit.save
