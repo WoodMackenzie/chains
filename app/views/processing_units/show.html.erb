@@ -39,7 +39,8 @@
       <div class="btn-toolbar">
         <div class="btn-group">
           <%= button_to 'Edit', edit_processing_unit_path(@processing_unit),
-            class: 'btn btn-warning active' %>
+            class: 'btn btn-warning active',
+            method: :get %>
         </div> 
         <div class="btn-group">
           <%= button_to 'Back', processing_units_path,
