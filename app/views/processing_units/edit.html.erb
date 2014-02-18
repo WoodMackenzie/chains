@@ -1,6 +1,9 @@
-<h1>Editing processing_unit</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Edit Processing Unit</h4>
+  </div>
+  <%= render 'form' %>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @processing_unit %> |
-<%= link_to 'Back', processing_units_path %>
+<%= link_to 'Show', @processing_unit, html_options = {class: 'btn btn-primary active'} %>
+<%= link_to 'Back', processing_units_path, html_options = {class: 'btn btn-default'}  %>

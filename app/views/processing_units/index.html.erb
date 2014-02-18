@@ -1,35 +1,36 @@
-<h1>Index of Processing Units</h1>
-
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Unit Name</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @processing_units.each do |processing_unit| %>
-      <tr>
-        <td>
-          <% processing_unit.names.each do |name| %>
-            <%= link_to name.name,  polymorphic_path(name) %><br>
-          <% end %>
-        </td>
-        <td><%= processing_unit.latitude %></td>
-        <td><%= processing_unit.longitude %></td>
-        <td><%= link_to 'Show', processing_unit %></td>
-        <td><%= link_to 'Edit', edit_processing_unit_path(processing_unit) %></td>
-        <td><%= link_to 'Destroy', processing_unit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<a href="/processing_units/new" class="btn btn-default active" role="button">Create New Processing Unit</a>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Processing Units</h4>
+  </div>
+  <div class="panel-body">
+    <a href="/processing_units/new" class="btn btn-success active" role="button">Create New Processing Unit</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Unit Name</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @processing_units.each do |processing_unit| %>
+          <tr>
+            <td>
+              <% processing_unit.names.each do |name| %>
+                <%= link_to name.name,  polymorphic_path(name) %><br>
+              <% end %>
+            </td>
+            <td><%= processing_unit.latitude %></td>
+            <td><%= processing_unit.longitude %></td>
+            <td><%= link_to 'Show', 
+              processing_unit, 
+              html_options = {class: 'btn btn-primary active'} %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>

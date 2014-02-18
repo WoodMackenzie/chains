@@ -1,22 +1,58 @@
-<p>
-  <strong>Latitude:</strong>
-  <%= @processing_unit.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @processing_unit.longitude %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @processing_unit.address %>
-</p>
-
-<p>
-  <strong>Last Updated By:</strong>
-  <%= User.find(@processing_unit.user_id).full_name %>
-</p>
-
-<%= link_to 'Edit', edit_processing_unit_path(@processing_unit) %> |
-<%= link_to 'Back', processing_units_path %>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Unit Name To Go Here</h4>
+    </div>
+    <div class="panel-body">
+      <div class="form">
+        <div class="form-group">
+          <label>Latitude:</label>
+            <p class="form-control-static">
+              <%= @processing_unit.latitude %>
+            </p>
+        </div>
+        <div class="form-group">
+          <label>Longitude:</label>
+          <p class="form-control-static">
+            <%= @processing_unit.longitude %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Address:</label>
+          <p class="form-control-static">
+            <%= @processing_unit.address %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated By:</label>
+          <p class="form-control-static">
+            <%= User.find(@processing_unit.user_id).full_name %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated:</label>
+          <p class="form-control-static">
+            <%= time_ago_in_words(@processing_unit.updated_at) + " ago" %>
+          </p>
+        </div>
+      </div>
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <%= button_to 'Edit', edit_processing_unit_path(@processing_unit),
+            class: 'btn btn-warning active' %>
+        </div> 
+        <div class="btn-group">
+          <%= button_to 'Back', processing_units_path,
+            class: 'btn btn-primary active',
+            method: :get %>
+        </div>
+        <div class="btn-group">    
+          <%= button_to 'Destroy', @processing_unit,
+            method: :delete,
+            class: 'btn btn-danger active',
+            data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
