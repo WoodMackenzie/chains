@@ -1,5 +1,7 @@
-<h1>New processing_unit</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', processing_units_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>New Processing Unit</h4>
+  </div>
+  <%= render 'form' %>
+</div>
+<%= link_to 'Back', processing_units_path, html_options = {class: 'btn btn-default'} %>

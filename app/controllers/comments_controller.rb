@@ -15,6 +15,8 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
+    @comment.commentable_id=params[:commentable_id]
+    @comment.commentable_type=params[:commentable_type]
   end
 
   # GET /comments/1/edit
@@ -25,6 +27,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
+    @comment.user_id = current_user.id
 
     respond_to do |format|
       if @comment.save
@@ -40,6 +43,7 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
+    @comment.user_id = current_user.id
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }

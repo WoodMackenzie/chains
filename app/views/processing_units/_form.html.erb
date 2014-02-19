@@ -1,13 +1,17 @@
-<%= simple_form_for(@processing_unit) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :latitude %>
-    <%= f.input :longitude %>
-    <%= f.input :user_id, input_html: { value: current_user.id }, label: current_user.full_name, disabled: true, hint: 'You cannot change your user ID' %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+<div class="panel-body">
+  <%= simple_form_for(@processing_unit) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :initial_name, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+    <%= f.input :latitude, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+    <%= f.input :longitude,
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+    <%= f.button :submit,
+      label: "Create Processing Unit",
+      class: 'btn btn-success' %>
+  <% end %>
+</div>

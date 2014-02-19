@@ -1,17 +1,93 @@
-<p>
-  <strong>Latitude:</strong>
-  <%= @processing_unit.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @processing_unit.longitude %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @processing_unit.address %>
-</p>
-
-<%= link_to 'Edit', edit_processing_unit_path(@processing_unit) %> |
-<%= link_to 'Back', processing_units_path %>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>
+          <%= @processing_unit.latest_historical_name(Time.now) %>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <div class="form">
+        <div class="form-group">
+          <label>Latitude:</label>
+            <p class="form-control-static">
+              <%= @processing_unit.latitude %>
+            </p>
+        </div>
+        <div class="form-group">
+          <label>Longitude:</label>
+          <p class="form-control-static">
+            <%= @processing_unit.longitude %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Address:</label>
+          <p class="form-control-static">
+            <%= @processing_unit.address %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated By:</label>
+          <p class="form-control-static">
+            <%= User.find(@processing_unit.user_id).full_name %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated:</label>
+          <p class="form-control-static">
+            <%= time_ago_in_words(@processing_unit.updated_at) + " ago" %>
+          </p>
+        </div>
+      </div>
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <%= button_to 'Edit', edit_processing_unit_path(@processing_unit),
+            class: 'btn btn-warning active',
+            method: :get %>
+        </div> 
+        <div class="btn-group">
+          <%= button_to 'Back', processing_units_path,
+            class: 'btn btn-primary active',
+            method: :get %>
+        </div>
+        <div class="btn-group">    
+          <%= button_to 'Destroy', @processing_unit,
+            method: :delete,
+            class: 'btn btn-danger active',
+            data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Comments</h4>
+    </div>
+    <div class="panel-body">
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <%= link_to 'Create New Comment', new_comment_path(:commentable_type => "ProcessingUnit",:commentable_id => @processing_unit.id),
+            class: 'btn btn-success active' %>
+        </div> 
+      </div>
+      <div class="table table-hover">
+        <% @processing_unit.comments.each do |comment| %>
+          <tr>
+            <td><%= User.find(comment.user_id).full_name %></td>
+            <td><%= comment.commentable_type %></td>
+            <td><%= comment.comment %></td>
+            <td><%= link_to 'Show', 
+              comment, 
+              html_options = {class: 'btn btn-primary active'} %></td>
+          </tr>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>History of Processing Unit Name Changes</h4>
+    </div>
+    <div class="panel-body">
+    </div>
+  </div>
+</div>

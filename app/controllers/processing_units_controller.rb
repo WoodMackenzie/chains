@@ -24,23 +24,36 @@ class ProcessingUnitsController < ApplicationController
   # POST /processing_units
   # POST /processing_units.json
   def create
+
     @processing_unit = ProcessingUnit.new(processing_unit_params)
-    # @processing_unit.user_id = current_user.id
+    @processing_unit.user_id = current_user.id
 
     respond_to do |format|
       if @processing_unit.save
         format.html { redirect_to @processing_unit, notice: 'Processing unit was successfully created.' }
         format.json { render action: 'show', status: :created, location: @processing_unit }
+        # This section adds in the name we're giving to the processing unit into the names table as a distinct entry.
+        if name_params[:initial_name]
+          @name = Name.new
+          @name.name = name_params[:initial_name]
+          @name.user_id = current_user.id
+          @name.active_date = Time.now
+          @name.nameable_id = @processing_unit.id
+          @name.nameable_type = "ProcessingUnit"
+          @name.save
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: @processing_unit.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /processing_units/1
   # PATCH/PUT /processing_units/1.json
   def update
+    @processing_unit.user_id = current_user.id
     respond_to do |format|
       if @processing_unit.update(processing_unit_params)
         format.html { redirect_to @processing_unit, notice: 'Processing unit was successfully updated.' }
@@ -71,5 +84,9 @@ class ProcessingUnitsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def processing_unit_params
       params.require(:processing_unit).permit(:latitude, :longitude, :address, :user_id)
+    end
+
+    def name_params
+      params.require(:processing_unit).permit(:initial_name)
     end
 end

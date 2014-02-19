@@ -1,35 +1,31 @@
-<h1>Listing names</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Target</th>
-      <th>Target type</th>
-      <th>User</th>
-      <th>Active date</th>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @names.each do |name| %>
-      <tr>
-        <td><%= name.target_id %></td>
-        <td><%= name.target_type %></td>
-        <td><%= name.user_id %></td>
-        <td><%= name.active_date %></td>
-        <td><%= name.name %></td>
-        <td><%= link_to 'Show', name %></td>
-        <td><%= link_to 'Edit', edit_name_path(name) %></td>
-        <td><%= link_to 'Destroy', name, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Name', new_name_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Names</h4>
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Nameable ID</th>
+          <th>Nameable Type</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @names.each do |name| %>
+          <tr>
+            <td><%= name.user_id %></td>
+            <td><%= name.nameable_id %></td>
+            <td><%= name.nameable_type %></td>
+            <td><%= name.name %></td>
+            <td><%= link_to 'Show', 
+              name, 
+              html_options = {class: 'btn btn-primary active'} %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,14 +1,29 @@
-<%= simple_form_for(@comment) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :user_id %>
-    <%= f.input :commentable_id %>
-    <%= f.input :commentable_type %>
-    <%= f.input :comment %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+<div class="panel-body">
+  <%= simple_form_for(@comment) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :commentable_id,
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+    <%= f.input :commentable_type,
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+    <%= f.input :comment,
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+<!--     <div class="form-group">
+      <label>Target ID:</label>
+        <p class="form-control-static">
+          <%= @comment.commentable_id %>
+        </p>
+    </div>
+    <div class="form-group">
+      <label>Target Type:</label>
+      <p class="form-control-static">
+        <%= @comment.commentable_type %>
+      </p>
+    </div> -->
+    <%= f.button :submit,
+      label: "Create Comment",
+      class: 'btn btn-success' %>
+  <% end %>
+</div>
