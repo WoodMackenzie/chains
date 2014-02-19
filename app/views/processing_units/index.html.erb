@@ -19,9 +19,10 @@
         <% @processing_units.each do |processing_unit| %>
           <tr>
             <td>
-              <% processing_unit.names.each do |name| %>
+              <%= processing_unit.historical_names(Time.now).first.name %>
+<!--               <% processing_unit.names.each do |name| %>
                 <%= link_to name.name,  polymorphic_path(name) %><br>
-              <% end %>
+              <% end %> -->
             </td>
             <td><%= processing_unit.latitude %></td>
             <td><%= processing_unit.longitude %></td>

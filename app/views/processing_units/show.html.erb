@@ -1,7 +1,9 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4>Unit Name To Go Here</h4>
+      <h4>    
+        <%= @processing_unit.historical_names(Time.now).first.name %>
+      </h4>
     </div>
     <div class="panel-body">
       <div class="form">
