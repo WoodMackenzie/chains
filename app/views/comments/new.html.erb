@@ -1,5 +1,7 @@
-<h1>New comment</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', comments_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>New Comment</h4>
+  </div>
+  <%= render 'form' %>
+</div>
+<%= link_to 'Back', comments_path, html_options = {class: 'btn btn-default'} %>

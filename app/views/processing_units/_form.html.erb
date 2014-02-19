@@ -1,6 +1,9 @@
 <div class="panel-body">
   <%= simple_form_for(@processing_unit) do |f| %>
     <%= f.error_notification %>
+    <%= f.input :initial_name, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
     <%= f.input :latitude, 
       wrapper_html: { class: 'form-group' },
       input_html: { class: 'form-control' } %>

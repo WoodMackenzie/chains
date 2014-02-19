@@ -5,12 +5,6 @@ class ProcessingUnit < ActiveRecord::Base
   has_many :names, as: :nameable
   has_many :comments, as: :commentable
 
-  def name_at_date(which_date)
-    ordered_names = ProcessingUnit.names.order(active_date: :desc)
-    active_names = ordered_names.where(names.active_date < which_date)
-    
-  end
-
   def name_history
     self.names.order(active_date: :desc).order(updated_at: :desc)
   end
@@ -21,6 +15,15 @@ class ProcessingUnit < ActiveRecord::Base
 
   def historical_names(view_date)
     self.last_updated_name_history.where("active_date<=?",view_date)
+  end
+
+  def latest_historical_name(view_date)
+    if self.historical_names(view_date).first
+      self.historical_names(view_date).first.name
+    end
+  end
+
+  def initial_name
   end
 
 end

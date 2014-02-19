@@ -1,8 +1,8 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4>    
-        <%= @processing_unit.historical_names(Time.now).first.name %>
+      <h4>
+          <%= @processing_unit.latest_historical_name(Time.now) %>
       </h4>
     </div>
     <div class="panel-body">
@@ -56,6 +56,38 @@
             data: { confirm: 'Are you sure?' } %>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Comments</h4>
+    </div>
+    <div class="panel-body">
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <%= link_to 'Create New Comment', new_comment_path(:commentable_type => "ProcessingUnit",:commentable_id => @processing_unit.id),
+            class: 'btn btn-success active' %>
+        </div> 
+      </div>
+      <div class="table table-hover">
+        <% @processing_unit.comments.each do |comment| %>
+          <tr>
+            <td><%= User.find(comment.user_id).full_name %></td>
+            <td><%= comment.commentable_type %></td>
+            <td><%= comment.comment %></td>
+            <td><%= link_to 'Show', 
+              comment, 
+              html_options = {class: 'btn btn-primary active'} %></td>
+          </tr>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>History of Processing Unit Name Changes</h4>
+    </div>
+    <div class="panel-body">
     </div>
   </div>
 </div>
