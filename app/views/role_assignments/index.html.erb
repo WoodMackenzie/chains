@@ -1,0 +1,25 @@
+<h1>Listing role_assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @role_assignments.each do |role_assignment| %>
+      <tr>
+        <td><%= link_to 'Show', role_assignment %></td>
+        <td><%= link_to 'Edit', edit_role_assignment_path(role_assignment) %></td>
+        <td><%= link_to 'Destroy', role_assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Role assignment', new_role_assignment_path %>

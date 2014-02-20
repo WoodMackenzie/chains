@@ -1,4 +1,10 @@
 Chains::Application.routes.draw do
+  resources :roles
+
+  resources :role_assignments
+
+  resources :organizations
+
   resources :comments
 
   resources :names

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214212506) do
+ActiveRecord::Schema.define(version: 20140220135932) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -32,6 +32,12 @@ ActiveRecord::Schema.define(version: 20140214212506) do
     t.datetime "updated_at"
   end
 
+  create_table "organizations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
   create_table "processing_units", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -39,6 +45,26 @@ ActiveRecord::Schema.define(version: 20140214212506) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
+  end
+
+  create_table "role_assignments", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "role_id"
+    t.integer  "holder_id"
+    t.string   "holder_type"
+    t.integer  "subject_id"
+    t.string   "subject_type"
+    t.integer  "active_date"
+    t.float    "share"
+    t.integer  "user_id"
+  end
+
+  create_table "roles", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "role"
+    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|

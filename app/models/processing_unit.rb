@@ -4,6 +4,8 @@ class ProcessingUnit < ActiveRecord::Base
   after_validation :reverse_geocode
   has_many :names, as: :nameable
   has_many :comments, as: :commentable
+  has_many :role_assignments, as: :holder_assignable
+  has_many :role_assignments, as: :subject_assignable
 
   def name_history
     self.names.order(active_date: :desc).order(updated_at: :desc)
