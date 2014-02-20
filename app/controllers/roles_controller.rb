@@ -25,6 +25,7 @@ class RolesController < ApplicationController
   # POST /roles.json
   def create
     @role = Role.new(role_params)
+    @role.user_id = current_user.id
 
     respond_to do |format|
       if @role.save
@@ -40,6 +41,7 @@ class RolesController < ApplicationController
   # PATCH/PUT /roles/1
   # PATCH/PUT /roles/1.json
   def update
+    @role.user_id = current_user.id
     respond_to do |format|
       if @role.update(role_params)
         format.html { redirect_to @role, notice: 'Role was successfully updated.' }
@@ -69,6 +71,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params[:role]
+      params.require(:role).permit(:role)
     end
 end

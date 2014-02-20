@@ -1,25 +1,30 @@
-<h1>Listing roles</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @roles.each do |role| %>
-      <tr>
-        <td><%= link_to 'Show', role %></td>
-        <td><%= link_to 'Edit', edit_role_path(role) %></td>
-        <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Role', new_role_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Roles</h4>
+  </div>
+  <div class="panel-body">
+    <a href="/roles/new" class="btn btn-success active" role="button">Create New Role</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Last Updated By</th>
+          <th>Last Updated On</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @roles.each do |role| %>
+          <tr>
+            <td><%= role.role %></td>
+            <td><%= User.find(role.user_id).full_name %></td>
+            <td><%= role.updated_at %></td>
+            <td><%= link_to 'Show', 
+              role, 
+              html_options = {class: 'btn btn-primary active'} %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>

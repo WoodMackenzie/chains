@@ -1,6 +1,9 @@
-<h1>Editing role</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Edit Role</h4>
+  </div>
+  <%= render 'form' %>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @role %> |
-<%= link_to 'Back', roles_path %>
+<%= link_to 'Show', @role, html_options = {class: 'btn btn-primary active'} %>
+<%= link_to 'Back', roles_path, html_options = {class: 'btn btn-default'}  %>
