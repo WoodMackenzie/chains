@@ -1,25 +1,37 @@
-<h1>Listing role_assignments</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @role_assignments.each do |role_assignment| %>
-      <tr>
-        <td><%= link_to 'Show', role_assignment %></td>
-        <td><%= link_to 'Edit', edit_role_assignment_path(role_assignment) %></td>
-        <td><%= link_to 'Destroy', role_assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Role assignment', new_role_assignment_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Role Assignments</h4>
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Holder ID</th>
+          <th>Holder Type</th>
+          <th>Subject ID</th>
+          <th>Subject Type</th>
+          <th>Active Date</th>
+          <th>Share</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @role_assignments.each do |role_assignment| %>
+          <tr>
+            <td><%= role_assignment.user_id %></td>
+            <td><%= role_assignment.holder_id %></td>
+            <td><%= role_assignment.holder_type %></td>
+            <td><%= role_assignment.subject_id %></td>
+            <td><%= role_assignment.subject_type %></td>
+            <td><%= role_assignment.active_date %></td>
+            <td><%= role_assignment.share %></td>
+            <td><%= link_to 'Show', 
+              role_assignment, 
+              html_options = {class: 'btn btn-primary active'} %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

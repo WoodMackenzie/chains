@@ -23,6 +23,18 @@ class Organization < ActiveRecord::Base
     end
   end
 
+  def self.organization_names
+    array = Array.new
+    Organization.all.each do |organization|
+      array.push(organization.latest_historical_name(Time.now))
+    end
+    return array
+  end
+
+  # def information_source_names
+  #   self.organization_names.order()
+  # end
+
   def initial_name
   end
 
