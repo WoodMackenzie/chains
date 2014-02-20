@@ -25,11 +25,21 @@ class OrganizationsController < ApplicationController
   # POST /organizations.json
   def create
     @organization = Organization.new(organization_params)
+    @organization.user_id = current_user.id
 
     respond_to do |format|
       if @organization.save
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
         format.json { render action: 'show', status: :created, location: @organization }
+        if name_params[:initial_name]
+          @name = Name.new
+          @name.name = name_params[:initial_name]
+          @name.user_id = current_user.id
+          @name.active_date = Time.now
+          @name.nameable_id = @organization.id
+          @name.nameable_type = "Organization"
+          @name.save
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: @organization.errors, status: :unprocessable_entity }
@@ -69,6 +79,10 @@ class OrganizationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_params
-      params[:organization]
+      params.require(:organization).permit(:user_id)
+    end
+
+    def name_params
+      params.require(:organization).permit(:initial_name)
     end
 end

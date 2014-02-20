@@ -1,6 +1,8 @@
-<h1>Editing organization</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Edit Organization</h4>
+  </div>
+  <%= render 'form' %>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @organization %> |
-<%= link_to 'Back', organizations_path %>
+<%= link_to 'Back', @organization, html_options = {class: 'btn btn-default'}  %>
