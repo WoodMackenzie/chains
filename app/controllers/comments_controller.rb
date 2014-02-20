@@ -15,8 +15,8 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
-    @comment.commentable_id=params[:commentable_id]
-    @comment.commentable_type=params[:commentable_type]
+    @comment.commentable_id = params[:commentable_id]
+    @comment.commentable_type = params[:commentable_type]
   end
 
   # GET /comments/1/edit
@@ -28,11 +28,18 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
-
+    
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @comment }
+        @role_assignment = RoleAssignment.new
+        @role_assignment.role_id = Role.where("role = Information Source").first.id
+        @role_assignment.holder_id
+        @role_assignment.holder_type
+        @role_assignment.target_id = @comment.id
+        @role_assignment.target_type = "Comment"
+        @role_assignment.active_date = @comment.active_date
       else
         format.html { render action: 'new' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
@@ -74,5 +81,9 @@ class CommentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
       params.require(:comment).permit(:user_id, :commentable_id, :commentable_type, :comment)
+    end
+
+    def role_assignment_params
+      params.require(:role_assignment).permit(:role_id, :holder_id, :holder_type, :target_id, :target_type)
     end
 end
