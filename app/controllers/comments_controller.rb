@@ -90,7 +90,4 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:organization_id)
     end
 
-    def organization_id
-      params[:organization_id]
-    end
 end

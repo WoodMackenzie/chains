@@ -20,7 +20,7 @@
         <div class="form-group">
           <label>Information Source:</label>
           <p class="form-control-static">
-              <%= Organization.find(RoleAssignment.where('subject_id = ?', @comment.id).first.holder_id).latest_historical_name(Time.now) %>
+              <%= Organization.find(RoleAssignment.where('subject_id = ? AND subject_type = ?', @comment.id, "Comment").first.holder_id).latest_historical_name(Time.now) %>
           </p>
         </div>
         <div class="form-group">

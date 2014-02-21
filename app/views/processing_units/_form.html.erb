@@ -4,6 +4,9 @@
     <%= f.input :initial_name, 
       wrapper_html: { class: 'form-group' },
       input_html: { class: 'form-control' } %>
+    <%= f.input :organization_id, collection: Organization.organization_names, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
     <%= f.input :latitude, 
       wrapper_html: { class: 'form-group' },
       input_html: { class: 'form-control' } %>

@@ -28,4 +28,7 @@ class ProcessingUnit < ActiveRecord::Base
   def initial_name
   end
 
+  def organization_id
+  end
+
 end

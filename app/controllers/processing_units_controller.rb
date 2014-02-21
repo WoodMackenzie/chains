@@ -42,6 +42,16 @@ class ProcessingUnitsController < ApplicationController
           @name.nameable_type = "ProcessingUnit"
           @name.save
         end
+        @role_assignment = RoleAssignment.new
+        @role_assignment.role_id = Role.where('role = ?', 'Operator').first.id
+        @role_assignment.holder_id = Name.where("nameable_type = ? AND name = ?", 'Organization', role_assignment_params[:organization_id]).first.nameable_id
+        @role_assignment.holder_type = "Organization"
+        @role_assignment.subject_id = @processing_unit.id
+        @role_assignment.subject_type = "ProcessingUnit"
+        @role_assignment.active_date = Date.today
+        @role_assignment.user_id = current_user.id
+        @role_assignment.share = '1' 
+        @role_assignment.save  
       else
         format.html { render action: 'new' }
         format.json { render json: @processing_unit.errors, status: :unprocessable_entity }
@@ -88,5 +98,9 @@ class ProcessingUnitsController < ApplicationController
 
     def name_params
       params.require(:processing_unit).permit(:initial_name)
+    end
+
+    def role_assignment_params
+      params.require(:processing_unit).permit(:organization_id)
     end
 end
