@@ -2,10 +2,10 @@ class ProcessingUnit < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
-  has_many :names, as: :nameable
-  has_many :comments, as: :commentable
-  has_many :role_assignments, as: :holder_assignable
-  has_many :role_assignments, as: :subject_assignable
+  has_many :names, as: :nameable, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :role_holder_assignments, as: :holder, class_name: "RoleAssignment", dependent: :destroy
+  has_many :role_subject_assignments, as: :subject, class_name: "RoleAssignment", dependent: :destroy
 
   def name_history
     self.names.order(active_date: :desc).order(updated_at: :desc)
@@ -31,28 +31,25 @@ class ProcessingUnit < ActiveRecord::Base
   def organization_id
   end
 
-  # def self.search(search)
-  #   if search
-  #     search_condition = "%" + search + "%"
-  #     find(:all, :conditions => ['names LIKE ?', search_condition])
-  #   else
-  #     find(:all)
-  #   end
-  # end
-
-  # def self.search(search)
-  #   if search
-  #     array = Array.new
-  #     search_condition = "%" + search + "%"
-  #     ProcessingUnit.all.each do |processing_unit|
-  #       if processing_unit.names.find(:all, :conditions => ['names LIKE ?', search_condition])
-  #         array.push(processing_unit)
-  #       end
-  #     end
-  #     return array
-  #   else
-  #     find(:all)
-  #   end
-  # end
+  def self.search(search)
+    if search
+      array = Array.new
+      search_condition = "%" + search + "%"
+      name_results = Name.where('name LIKE ? and nameable_type = ?', search_condition, "ProcessingUnit")
+      name_results.all.each do |name_result|
+        array.push(name_result.nameable)
+      end        
+      # name_results.all.each do |name_result|
+      #   # if name_result.nameable_type = "ProcessingUnit"
+      #   #   array.push(name_result.nameable)
+      #   # elsif name_result.nameable_type = "Organization"
+      #   #   array.push(name_result.nameable.role_holder_assignments.where('subject_type = ?', "ProcessingUnit").subjects)
+      #   # end
+      # end
+      array
+    else
+      ProcessingUnit.all
+    end
+  end
 
 end

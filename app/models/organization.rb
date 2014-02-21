@@ -1,9 +1,9 @@
 class Organization < ActiveRecord::Base
 
-  has_many :names, as: :nameable
-  has_many :comments, as: :commentable
-  has_many :role_assignments, as: :holder_assignable
-  has_many :role_assignments, as: :subject_assignable
+  has_many :names, as: :nameable, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :role_holder_assignments, as: :holder, class_name: "RoleAssignment", dependent: :destroy
+  has_many :role_subject_assignments, as: :subject, class_name: "RoleAssignment", dependent: :destroy
 
   def name_history
     self.names.order(active_date: :desc).order(updated_at: :desc)
