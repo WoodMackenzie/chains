@@ -31,4 +31,28 @@ class ProcessingUnit < ActiveRecord::Base
   def organization_id
   end
 
+  # def self.search(search)
+  #   if search
+  #     search_condition = "%" + search + "%"
+  #     find(:all, :conditions => ['names LIKE ?', search_condition])
+  #   else
+  #     find(:all)
+  #   end
+  # end
+
+  # def self.search(search)
+  #   if search
+  #     array = Array.new
+  #     search_condition = "%" + search + "%"
+  #     ProcessingUnit.all.each do |processing_unit|
+  #       if processing_unit.names.find(:all, :conditions => ['names LIKE ?', search_condition])
+  #         array.push(processing_unit)
+  #       end
+  #     end
+  #     return array
+  #   else
+  #     find(:all)
+  #   end
+  # end
+
 end

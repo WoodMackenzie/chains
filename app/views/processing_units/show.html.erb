@@ -10,7 +10,9 @@
         <div class="form-group">
           <label>Operator:</label>
           <p class="form-control-static">
-              <%= Organization.find(RoleAssignment.where('subject_id = ? AND subject_type = ?', @processing_unit.id, "ProcessingUnit").first.holder_id).latest_historical_name(Time.now) %>
+            <% if RoleAssignment.where("subject_id = ? AND subject_type = ?", @processing_unit.id, "ProcessingUnit").first != nil %>
+            <%= Organization.find(RoleAssignment.where("subject_id = ? AND subject_type = ?", @processing_unit.id, "ProcessingUnit").first.holder_id).latest_historical_name(Time.now) %>
+          <% end %>
           </p>
         </div>
         <div class="form-group">

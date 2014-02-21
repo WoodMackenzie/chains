@@ -4,6 +4,7 @@ class ProcessingUnitsController < ApplicationController
   # GET /processing_units
   # GET /processing_units.json
   def index
+    # @processing_units = ProcessingUnit.search(params[:search])
     @processing_units = ProcessingUnit.all
   end
 
@@ -103,4 +104,8 @@ class ProcessingUnitsController < ApplicationController
     def role_assignment_params
       params.require(:processing_unit).permit(:organization_id)
     end
+
+    # def search_params
+    #   params.require(:processing_unit).permit(:search)
+    # end
 end
