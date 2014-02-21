@@ -28,6 +28,10 @@ class ProcessingUnitsController < ApplicationController
 
     @processing_unit = ProcessingUnit.new(processing_unit_params)
     @processing_unit.user_id = current_user.id
+    geoarray = Geocoder.search(@processing_unit.reverse_geocode)
+    @processing_unit.city = geoarray[0].city
+    @processing_unit.state = geoarray[0].state
+    @processing_unit.country = geoarray[0].country
 
     respond_to do |format|
       if @processing_unit.save
@@ -65,6 +69,10 @@ class ProcessingUnitsController < ApplicationController
   # PATCH/PUT /processing_units/1.json
   def update
     @processing_unit.user_id = current_user.id
+    geoarray = Geocoder.search(@processing_unit.reverse_geocode)
+    @processing_unit.city = geoarray[0].city
+    @processing_unit.state = geoarray[0].state
+    @processing_unit.country = geoarray[0].country
     respond_to do |format|
       if @processing_unit.update(processing_unit_params)
         format.html { redirect_to @processing_unit, notice: 'Processing unit was successfully updated.' }

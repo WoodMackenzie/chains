@@ -52,4 +52,8 @@ class ProcessingUnit < ActiveRecord::Base
     end
   end
 
+  def full_location
+    self.city + ", " + self.state + ", " + self.country
+  end
+
 end

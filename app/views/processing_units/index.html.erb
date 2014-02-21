@@ -21,8 +21,7 @@
         <tr>
           <th>Unit Name</th>
           <th>Unit Operator</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
+          <th>Location</th>
           <th></th>
         </tr>
       </thead>
@@ -32,9 +31,14 @@
             <td>
               <%= processing_unit.latest_historical_name(Time.now) %>
             </td>
-            <td></td>
-            <td><%= processing_unit.latitude %></td>
-            <td><%= processing_unit.longitude %></td>
+            <td>
+              <p class="form-control-static">
+                <% if RoleAssignment.where("subject_id = ? AND subject_type = ?", processing_unit.id, "ProcessingUnit").first != nil %>
+                <%= Organization.find(RoleAssignment.where("subject_id = ? AND subject_type = ?", processing_unit.id, "ProcessingUnit").first.holder_id).latest_historical_name(Time.now) %>
+              <% end %>
+              </p>
+            </td>
+            <td><%= processing_unit.full_location %></td>
             <td><%= link_to 'Show', 
               processing_unit, 
               html_options = {class: 'btn btn-primary active'} %></td>
