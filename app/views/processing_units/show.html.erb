@@ -77,7 +77,7 @@
         <% @processing_unit.comments.each do |comment| %>
           <tr>
             <td><%= User.find(comment.user_id).full_name %></td>
-            <td><%= comment.updated_at %></td>
+            <td><%= comment.active_date %></td>
             <td><%= comment.comment %></td>
             <td><%= link_to 'Show', 
               comment, 

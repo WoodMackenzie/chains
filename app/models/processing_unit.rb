@@ -46,7 +46,8 @@ class ProcessingUnit < ActiveRecord::Base
       #   #   array.push(name_result.nameable.role_holder_assignments.where('subject_type = ?', "ProcessingUnit").subjects)
       #   # end
       # end
-      array
+      puts array
+      return array
     else
       ProcessingUnit.all
     end
