@@ -6,10 +6,10 @@
 <div class="panel-body">
   <%= simple_form_for(@processing_unit) do |f| %>
     <%= f.error_notification %>
-    <%= f.input :initial_name, 
+    <%= f.input :initial_name, label: 'Processing Unit Name',
       wrapper_html: { class: 'form-group' },
       input_html: { class: 'form-control' } %>
-    <%= f.input :organization_id, collection: Organization.organization_names, :hint => "Organization is a required field.  If you have not input the organization you need in the 'Organizations' tab, please go back and do that now.",
+    <%= f.input :organization_id, collection: Organization.organization_names, label: 'Operator Name', :hint => "Organization is a required field.  If you have not input the organization you need in the 'Organizations' tab, please go back and do that now.",
       wrapper_html: { class: 'form-group' },
       input_html: { class: 'form-control' } %>
     <%= f.input :latitude, 
