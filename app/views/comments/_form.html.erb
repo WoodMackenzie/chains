@@ -11,7 +11,9 @@
       wrapper_html: { class: 'form-inline' },
       input_html: { class: 'form-control' } %>
     <br />
-    <%= f.input :organization_id, collection: Organization.organization_names, 
+    <%= f.input :organization_id, 
+      collection: Organization.organization_names, 
+      label: 'Information Source',
       wrapper_html: { class: 'form-group' },
       input_html: { class: 'form-control' } %>
     <%= f.input :comment,

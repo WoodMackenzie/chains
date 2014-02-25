@@ -46,7 +46,6 @@ class ProcessingUnit < ActiveRecord::Base
       #   #   array.push(name_result.nameable.role_holder_assignments.where('subject_type = ?', "ProcessingUnit").subjects)
       #   # end
       # end
-      puts array
       return array
     else
       ProcessingUnit.all
@@ -54,7 +53,11 @@ class ProcessingUnit < ActiveRecord::Base
   end
 
   def full_location
-    self.city + ", " + self.state + ", " + self.country
+    if self.city.nil?
+      self.state + ", " + self.country
+    else
+      self.city + ", " + self.state + ", " + self.country
+    end
   end
 
 end
