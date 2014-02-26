@@ -19,6 +19,8 @@ gem 'simple_form'
 
 gem 'geocoder'
 
+gem 'ancestry'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
