@@ -25,6 +25,7 @@ class UnitTypesController < ApplicationController
   # POST /unit_types.json
   def create
     @unit_type = UnitType.new(unit_type_params)
+    @unit_type.user_id = current_user.id
 
     respond_to do |format|
       if @unit_type.save
@@ -69,6 +70,7 @@ class UnitTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def unit_type_params
-      params[:unit_type]
+      params.require(:unit_type).permit(:user_id, :description)
     end
+
 end

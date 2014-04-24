@@ -1,6 +1,8 @@
-<h1>Editing unit_type</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Edit Unit Type</h4>
+  </div>
+  <%= render 'form' %>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @unit_type %> |
-<%= link_to 'Back', unit_types_path %>
+<%= link_to 'Back', @unit_type html_options = {class: 'btn btn-default'}  %>
