@@ -31,6 +31,9 @@ class ProcessingUnit < ActiveRecord::Base
   def organization_id
   end
 
+  def unit_type_desc
+  end
+
   def self.search(search)
     if search
       array = Array.new

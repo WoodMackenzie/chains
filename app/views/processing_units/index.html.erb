@@ -21,6 +21,7 @@
         <tr>
           <th>Unit Name</th>
           <th>Unit Operator</th>
+          <th>Unit Type</th>
           <th>Location</th>
           <th></th>
         </tr>
@@ -38,6 +39,7 @@
               <% end %>
               </p>
             </td>
+            <td><%= UnitType.find(processing_unit.unit_type_id).description %></td>
             <td><%= processing_unit.full_location %></td>
             <td><%= link_to 'Show', 
               processing_unit, 

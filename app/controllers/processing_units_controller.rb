@@ -32,6 +32,7 @@ class ProcessingUnitsController < ApplicationController
     @processing_unit.city = geoarray[0].city
     @processing_unit.state = geoarray[0].state
     @processing_unit.country = geoarray[0].country
+    @processing_unit.unit_type_id = UnitType.where("description = ?", unit_type_params[:unit_type_desc]).first.id
 
     respond_to do |format|
       if @processing_unit.save
@@ -111,6 +112,10 @@ class ProcessingUnitsController < ApplicationController
 
     def role_assignment_params
       params.require(:processing_unit).permit(:organization_id)
+    end
+
+    def unit_type_params
+      params.require(:processing_unit).permit(:unit_type_desc)
     end
 
     # def search_params
