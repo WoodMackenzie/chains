@@ -74,6 +74,7 @@ class ProcessingUnitsController < ApplicationController
     @processing_unit.city = geoarray[0].city
     @processing_unit.state = geoarray[0].state
     @processing_unit.country = geoarray[0].country
+    @processing_unit.unit_type_id = UnitType.where("description = ?", unit_type_params[:unit_type_desc]).first.id
     respond_to do |format|
       if @processing_unit.update(processing_unit_params)
         format.html { redirect_to @processing_unit, notice: 'Processing unit was successfully updated.' }

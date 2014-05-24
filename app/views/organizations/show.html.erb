@@ -44,4 +44,35 @@
       </div>
     </div>
   </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>History of Processing Unit Name Changes</h4>
+    </div>
+    <div class="panel-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Organizaiton Name</th>
+            <th>User Name</th>
+            <th>Last Updated At</th>
+            <th>Valid As Of</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @organization.names.each do |name| %>
+            <tr>
+              <td><%= name.name %></td>
+              <td><%= User.find(name.user_id).full_name %></td>
+              <td><%= name.updated_at %></td>
+              <td><%= name.active_date %></td>
+              <td><%= link_to 'Show', 
+                name, 
+                html_options = {class: 'btn btn-primary active'} %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

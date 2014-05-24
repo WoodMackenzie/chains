@@ -54,6 +54,15 @@ class OrganizationsController < ApplicationController
       if @organization.update(organization_params)
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { head :no_content }
+        if name_params[:initial_name]
+          @name = Name.new
+          @name.name = name_params[:initial_name]
+          @name.user_id = current_user.id
+          @name.active_date = Time.now
+          @name.nameable_id = @organization.id
+          @name.nameable_type = "Organization"
+          @name.save
+        end
       else
         format.html { render action: 'edit' }
         format.json { render json: @organization.errors, status: :unprocessable_entity }

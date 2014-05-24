@@ -102,20 +102,20 @@
     <table class="table table-hover">
       <thead>
         <tr>
+          <th>Unit Name</th>
           <th>User Name</th>
           <th>Last Updated At</th>
           <th>Valid As Of</th>
-          <th>Unit Name</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <% @processing_unit.names.each do |name| %>
           <tr>
+            <td><%= name.name %></td>
             <td><%= User.find(name.user_id).full_name %></td>
             <td><%= name.updated_at %></td>
             <td><%= name.active_date %></td>
-            <td><%= name.name %></td>
             <td><%= link_to 'Show', 
               name, 
               html_options = {class: 'btn btn-primary active'} %></td>
