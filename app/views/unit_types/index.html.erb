@@ -1,31 +1,32 @@
-<h1>Listing unit_types</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Description</th>
-      <th>Parent</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @unit_types.each do |unit_type| %>
-      <tr>
-        <td><%= unit_type.user_id %></td>
-        <td><%= unit_type.description %></td>
-        <td><%= unit_type.parent_id %></td>
-        <td><%= link_to 'Show', unit_type %></td>
-        <td><%= link_to 'Edit', edit_unit_type_path(unit_type) %></td>
-        <td><%= link_to 'Destroy', unit_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Unit type', new_unit_type_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Unit Types</h4>
+  </div>
+  <div class="panel-body">
+    <a href="/unit_types/new" class="btn btn-success active" role="button">Create New Unit Type</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Unit Type</th>
+          <th>Parent ID</th>
+          <th>Last Updated By</th>
+          <th>Last Updated On</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @unit_types.each do |unit_type| %>
+          <tr>
+            <td><%= unit_type.description %></td>
+            <td><%= unit_type.parent_id %></td>
+            <td><%= User.find(unit_type.user_id).full_name %></td>
+            <td><%= unit_type.created_at %></td>
+            <td><%= link_to 'Show', unit_type %></td>
+            <td><%= link_to 'Edit', edit_unit_type_path(unit_type) %></td>
+            <td><%= link_to 'Destroy', unit_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>

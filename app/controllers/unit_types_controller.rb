@@ -14,7 +14,7 @@ class UnitTypesController < ApplicationController
 
   # GET /unit_types/new
   def new
-    @unit_type = UnitType.new
+    @unit_type = UnitType.new(:parent_id => params[:parent_id])
   end
 
   # GET /unit_types/1/edit
@@ -25,7 +25,8 @@ class UnitTypesController < ApplicationController
   # POST /unit_types.json
   def create
     @unit_type = UnitType.new(unit_type_params)
-
+    @unit_type.user_id = current_user.id
+    # @unit_type.parent_id = params[:parent_id]
     respond_to do |format|
       if @unit_type.save
         format.html { redirect_to @unit_type, notice: 'Unit type was successfully created.' }
@@ -40,6 +41,7 @@ class UnitTypesController < ApplicationController
   # PATCH/PUT /unit_types/1
   # PATCH/PUT /unit_types/1.json
   def update
+    @unit_type.user_id = current_user.id
     respond_to do |format|
       if @unit_type.update(unit_type_params)
         format.html { redirect_to @unit_type, notice: 'Unit type was successfully updated.' }
@@ -71,4 +73,5 @@ class UnitTypesController < ApplicationController
     def unit_type_params
       params.require(:unit_type).permit(:user_id, :description, :parent_id)
     end
+
 end
