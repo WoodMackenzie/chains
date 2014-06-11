@@ -16,15 +16,17 @@
       </thead>
       <tbody>
         <% @unit_types.each do |unit_type| %>
-          <tr>
-            <td><%= unit_type.description %></td>
-            <td><%= unit_type.parent_id %></td>
-            <td><%= User.find(unit_type.user_id).full_name %></td>
-            <td><%= unit_type.created_at %></td>
-            <td><%= link_to 'Show', unit_type %></td>
-            <td><%= link_to 'Edit', edit_unit_type_path(unit_type) %></td>
-            <td><%= link_to 'Destroy', unit_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
+          <% if @unit_types.root_unit_type_ids.include? unit_type.id %>
+            <tr>
+              <td><%= unit_type.description %></td>
+              <td><%= unit_type.parent_id %></td>
+              <td><%= User.find(unit_type.user_id).full_name %></td>
+              <td><%= unit_type.created_at %></td>
+              <td><%= link_to 'Show', unit_type %></td>
+              <td><%= link_to 'Edit', edit_unit_type_path(unit_type) %></td>
+              <td><%= link_to 'Destroy', unit_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>    

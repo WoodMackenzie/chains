@@ -1,7 +1,9 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4>Unit Type</h4>
+      <h4>
+        <%= @unit_type.description %>
+      </h4>
     </div>
     <div class="panel-body">
       <div class="form">
@@ -48,9 +50,58 @@
             data: { confirm: 'Are you sure?  This will also delete any names, comments, and role assignments that go along with this unit type.' } %>
         </div>
         <div class="btn-group">
-          <%= link_to 'Create Sub-Unit Type', new_unit_type_path(:parent_id => @unit_type) %>
-        </div> 
+          <%= link_to 'Create Sub-Unit Type', 
+            new_unit_type_path(:parent_id => @unit_type),
+            html_options = {class: 'btn btn-success active'} %>
+        </div>
       </div>
+    </div>
+  </div>
+</div>
+<div class = "container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>
+        Sub-Unit Types of <%= @unit_type.description %>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Unit Type</th>
+            <th>Parent ID</th>
+            <th>Last Updated By</th>
+            <th>Last Updated On</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% UnitType.all.each do |unit_type_variable| %>
+            <% if unit_type_variable.parent_id == @unit_type.id %>
+              <tr>
+                <td><%= unit_type_variable.description %></td>
+                <td><%= unit_type_variable.parent_id %></td>
+                <td><%= User.find(unit_type_variable.user_id).full_name %></td>
+                <td><%= unit_type_variable.created_at %></td>
+                <td><%= link_to 'Show', unit_type_variable, html_options = {class: 'btn btn-primary active'} %></td>
+                <td><%= link_to 'Edit', edit_unit_type_path(unit_type_variable), html_options = {class: 'btn btn-warning active'} %></td>
+                <td>
+                  <%= button_to 'Destroy', unit_type_variable,
+                  method: :delete,
+                  class: 'btn btn-danger active',
+                  data: { confirm: 'Are you sure?  This will also delete any names, comments, and role assignments that go along with this unit type.' } %>
+                </td>
+                <td>
+                  <%= link_to 'Create Sub-Unit Type', 
+                    new_unit_type_path(:parent_id => unit_type_variable),
+                    html_options = {class: 'btn btn-success active'} %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>    
     </div>
   </div>
 </div>
