@@ -33,6 +33,7 @@ class UnitType < ActiveRecord::Base
   end
 
   def unit_type_string
+    hash = Hash.new
     temp_string = ""
     current_unit_type = self
     until current_unit_type.parent_id.nil?
@@ -48,16 +49,18 @@ class UnitType < ActiveRecord::Base
     else
       temp_string = current_unit_type.description
     end
+    hash[self.id] = temp_string
+    hash
   end
 
   def self.unit_type_list
-    array = Array.new
+    hash = Hash.new
     UnitType.all.each do |unit_type|
       if unit_type.has_no_children
-        array.push(unit_type.unit_type_string)
+        hash[unit_type.unit_type_string.keys.first] = unit_type.unit_type_string[unit_type.unit_type_string.keys.first]
       end
     end
-    return array
+    return hash
   end
 
 end

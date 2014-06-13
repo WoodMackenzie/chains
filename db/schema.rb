@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610005059) do
+ActiveRecord::Schema.define(version: 20140613124127) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140610005059) do
     t.string   "city"
     t.string   "state"
     t.string   "country"
+    t.integer  "unit_type_id"
   end
 
   create_table "role_assignments", force: true do |t|

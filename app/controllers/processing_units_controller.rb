@@ -32,6 +32,7 @@ class ProcessingUnitsController < ApplicationController
     @processing_unit.city = geoarray[0].city
     @processing_unit.state = geoarray[0].state
     @processing_unit.country = geoarray[0].country
+    @processing_unit.unit_type_id = UnitType.unit_type_list.index(unit_type_params[:unit_type_description])
 
     respond_to do |format|
       if @processing_unit.save
@@ -56,7 +57,7 @@ class ProcessingUnitsController < ApplicationController
         @role_assignment.active_date = Date.today
         @role_assignment.user_id = current_user.id
         @role_assignment.share = '1' 
-        @role_assignment.save  
+        @role_assignment.save
       else
         format.html { render action: 'new' }
         format.json { render json: @processing_unit.errors, status: :unprocessable_entity }
@@ -73,6 +74,7 @@ class ProcessingUnitsController < ApplicationController
     @processing_unit.city = geoarray[0].city
     @processing_unit.state = geoarray[0].state
     @processing_unit.country = geoarray[0].country
+    @processing_unit.unit_type_id = UnitType.unit_type_list.index(unit_type_params[:unit_type_description])
     respond_to do |format|
       if @processing_unit.update(processing_unit_params)
         format.html { redirect_to @processing_unit, notice: 'Processing unit was successfully updated.' }
