@@ -1,6 +1,7 @@
 <div class="panel-body">
   <%= simple_form_for(@unit_type) do |f| %>
     <%= f.error_notification %>
+    <%= f.hidden_field :parent_id %>
     <%= f.input :description, 
       wrapper_html: { class: 'form-group' },
       input_html: { class: 'form-control' } %>

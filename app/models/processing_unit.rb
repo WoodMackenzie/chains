@@ -31,7 +31,7 @@ class ProcessingUnit < ActiveRecord::Base
   def organization_id
   end
 
-  def unit_type_desc
+  def unit_type_description
   end
 
   def self.search(search)
