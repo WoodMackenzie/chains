@@ -8,7 +8,7 @@
       <thead>
         <tr>
           <th>Unit Type</th>
-          <th>Parent ID</th>
+          <th>Parent</th>
           <th>Last Updated By</th>
           <th>Last Updated On</th>
           <th></th>
@@ -19,12 +19,23 @@
           <% if @unit_types.root_unit_type_ids.include? unit_type.id %>
             <tr>
               <td><%= unit_type.description %></td>
-              <td><%= unit_type.parent_id %></td>
+              <td>
+                <% if unit_type.parent_id.nil? %>
+                  Root Unit Type
+                <% else %>
+                  <%= UnitType.find(unit_type.parent_id).description %>
+                <% end %>
+              </td>
               <td><%= User.find(unit_type.user_id).full_name %></td>
               <td><%= unit_type.created_at %></td>
-              <td><%= link_to 'Show', unit_type %></td>
-              <td><%= link_to 'Edit', edit_unit_type_path(unit_type) %></td>
-              <td><%= link_to 'Destroy', unit_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to 'Show', unit_type, html_options = {class: 'btn btn-primary active'} %></td>
+              <td><%= link_to 'Edit', edit_unit_type_path(unit_type), 
+                html_options = {class: 'btn btn-warning active'} %></td>
+              <td><%= button_to 'Destroy', unit_type,
+                  method: :delete,
+                  class: 'btn btn-danger active',
+                  data: { confirm: 'Are you sure?  This will also delete any names, comments, and role assignments that go along with this unit type.' } %>
+              </td>
             </tr>
           <% end %>
         <% end %>

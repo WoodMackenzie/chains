@@ -132,6 +132,10 @@ class ProcessingUnitsController < ApplicationController
       params.require(:processing_unit).permit(:organization_id)
     end
 
+    def unit_type_params
+      params.require(:processing_unit).permit(:unit_type_description)
+    end
+
     # def search_params
     #   params.require(:processing_unit).permit(:search)
     # end
