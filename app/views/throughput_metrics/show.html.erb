@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @throughput_metric.user_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @throughput_metric.description %>
+</p>
+
+<%= link_to 'Edit', edit_throughput_metric_path(@throughput_metric) %> |
+<%= link_to 'Back', throughput_metrics_path %>

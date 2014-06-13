@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  unit_id: 1
+  metric_id: 1
+  amount_unit_id: 1
+  time_unit_id: 1
+  commodity_id: 1
+  active_date: 2014-06-13
+
+two:
+  user_id: 1
+  unit_id: 1
+  metric_id: 1
+  amount_unit_id: 1
+  time_unit_id: 1
+  commodity_id: 1
+  active_date: 2014-06-13

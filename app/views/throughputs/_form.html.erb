@@ -1,0 +1,17 @@
+<%= simple_form_for(@throughput) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :user_id %>
+    <%= f.input :unit_id %>
+    <%= f.input :metric_id %>
+    <%= f.input :amount_unit_id %>
+    <%= f.input :time_unit_id %>
+    <%= f.input :commodity_id %>
+    <%= f.input :active_date %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

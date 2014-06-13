@@ -1,4 +1,14 @@
 Chains::Application.routes.draw do
+  resources :measure_types
+
+  resources :units_of_measures
+
+  resources :commodities
+
+  resources :throughput_metrics
+
+  resources :throughputs
+
   resources :unit_types
 
   resources :roles

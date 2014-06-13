@@ -1,0 +1,29 @@
+<h1>Listing throughput_metrics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @throughput_metrics.each do |throughput_metric| %>
+      <tr>
+        <td><%= throughput_metric.user_id %></td>
+        <td><%= throughput_metric.description %></td>
+        <td><%= link_to 'Show', throughput_metric %></td>
+        <td><%= link_to 'Edit', edit_throughput_metric_path(throughput_metric) %></td>
+        <td><%= link_to 'Destroy', throughput_metric, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Throughput metric', new_throughput_metric_path %>

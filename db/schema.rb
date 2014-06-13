@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613124127) do
+ActiveRecord::Schema.define(version: 20140613190634) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -21,6 +21,20 @@ ActiveRecord::Schema.define(version: 20140613124127) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "active_date"
+  end
+
+  create_table "commodities", force: true do |t|
+    t.integer  "user_id"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "measure_types", force: true do |t|
+    t.integer  "user_id"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "names", force: true do |t|
@@ -72,10 +86,37 @@ ActiveRecord::Schema.define(version: 20140613124127) do
     t.integer  "user_id"
   end
 
+  create_table "throughput_metrics", force: true do |t|
+    t.integer  "user_id"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "throughputs", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "unit_id"
+    t.integer  "metric_id"
+    t.integer  "amount_unit_id"
+    t.integer  "time_unit_id"
+    t.integer  "commodity_id"
+    t.date     "active_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "unit_types", force: true do |t|
     t.integer  "user_id"
     t.string   "description"
     t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "units_of_measures", force: true do |t|
+    t.integer  "user_id"
+    t.string   "description"
+    t.integer  "measure_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

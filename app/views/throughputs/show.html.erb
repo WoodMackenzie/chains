@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @throughput.user_id %>
+</p>
+
+<p>
+  <strong>Unit:</strong>
+  <%= @throughput.unit_id %>
+</p>
+
+<p>
+  <strong>Metric:</strong>
+  <%= @throughput.metric_id %>
+</p>
+
+<p>
+  <strong>Amount unit:</strong>
+  <%= @throughput.amount_unit_id %>
+</p>
+
+<p>
+  <strong>Time unit:</strong>
+  <%= @throughput.time_unit_id %>
+</p>
+
+<p>
+  <strong>Commodity:</strong>
+  <%= @throughput.commodity_id %>
+</p>
+
+<p>
+  <strong>Active date:</strong>
+  <%= @throughput.active_date %>
+</p>
+
+<%= link_to 'Edit', edit_throughput_path(@throughput) %> |
+<%= link_to 'Back', throughputs_path %>

@@ -1,0 +1,29 @@
+<h1>Listing measure_types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @measure_types.each do |measure_type| %>
+      <tr>
+        <td><%= measure_type.user_id %></td>
+        <td><%= measure_type.description %></td>
+        <td><%= link_to 'Show', measure_type %></td>
+        <td><%= link_to 'Edit', edit_measure_type_path(measure_type) %></td>
+        <td><%= link_to 'Destroy', measure_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Measure type', new_measure_type_path %>

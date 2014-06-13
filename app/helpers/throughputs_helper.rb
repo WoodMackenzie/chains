@@ -1,0 +1,2 @@
+module ThroughputsHelper
+end

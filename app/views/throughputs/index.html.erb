@@ -1,0 +1,39 @@
+<h1>Listing throughputs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Unit</th>
+      <th>Metric</th>
+      <th>Amount unit</th>
+      <th>Time unit</th>
+      <th>Commodity</th>
+      <th>Active date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @throughputs.each do |throughput| %>
+      <tr>
+        <td><%= throughput.user_id %></td>
+        <td><%= throughput.unit_id %></td>
+        <td><%= throughput.metric_id %></td>
+        <td><%= throughput.amount_unit_id %></td>
+        <td><%= throughput.time_unit_id %></td>
+        <td><%= throughput.commodity_id %></td>
+        <td><%= throughput.active_date %></td>
+        <td><%= link_to 'Show', throughput %></td>
+        <td><%= link_to 'Edit', edit_throughput_path(throughput) %></td>
+        <td><%= link_to 'Destroy', throughput, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Throughput', new_throughput_path %>

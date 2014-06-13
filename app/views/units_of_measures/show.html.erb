@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @units_of_measure.user_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @units_of_measure.description %>
+</p>
+
+<p>
+  <strong>Measure type:</strong>
+  <%= @units_of_measure.measure_type_id %>
+</p>
+
+<%= link_to 'Edit', edit_units_of_measure_path(@units_of_measure) %> |
+<%= link_to 'Back', units_of_measures_path %>

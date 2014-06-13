@@ -1,0 +1,31 @@
+<h1>Listing units_of_measures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Description</th>
+      <th>Measure type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @units_of_measures.each do |units_of_measure| %>
+      <tr>
+        <td><%= units_of_measure.user_id %></td>
+        <td><%= units_of_measure.description %></td>
+        <td><%= units_of_measure.measure_type_id %></td>
+        <td><%= link_to 'Show', units_of_measure %></td>
+        <td><%= link_to 'Edit', edit_units_of_measure_path(units_of_measure) %></td>
+        <td><%= link_to 'Destroy', units_of_measure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Units of measure', new_units_of_measure_path %>
