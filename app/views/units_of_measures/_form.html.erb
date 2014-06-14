@@ -1,13 +1,14 @@
-<%= simple_form_for(@units_of_measure) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :user_id %>
-    <%= f.input :description %>
-    <%= f.input :measure_type_id %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+<div class="panel-body">
+  <%= simple_form_for(@units_of_measure) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :description, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+    <%= f.input :measure_type_description, collection: MeasureType.measure_type_names, label: 'Canonical Measurement Type',
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+    <%= f.button :submit,
+      value: "Create New Measurement",
+      class: 'btn btn-success active' %>
+  <% end %>
+</div>

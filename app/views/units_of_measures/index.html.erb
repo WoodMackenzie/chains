@@ -1,31 +1,37 @@
-<h1>Listing units_of_measures</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Description</th>
-      <th>Measure type</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @units_of_measures.each do |units_of_measure| %>
-      <tr>
-        <td><%= units_of_measure.user_id %></td>
-        <td><%= units_of_measure.description %></td>
-        <td><%= units_of_measure.measure_type_id %></td>
-        <td><%= link_to 'Show', units_of_measure %></td>
-        <td><%= link_to 'Edit', edit_units_of_measure_path(units_of_measure) %></td>
-        <td><%= link_to 'Destroy', units_of_measure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Units of measure', new_units_of_measure_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Units of Measurement</h4>
+  </div>
+  <div class="panel-body">
+    <a href="/units_of_measures/new" class="btn btn-success active" role="button">Create New Unit of Measurement</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Unit of Measurement</th>
+          <th>Measurement Type</th>
+          <th>Last Updated By</th>
+          <th>Last Updated On</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @units_of_measures.each do |units_of_measure| %>
+          <tr>
+            <td><%= units_of_measure.description %></td>
+            <td><%= MeasureType.find(units_of_measure.measure_type_id).description %></td>
+            <td><%= User.find(units_of_measure.user_id).full_name %></td>
+            <td><%= units_of_measure.updated_at %></td>
+            <td><%= link_to 'Show', units_of_measure, html_options = {class: 'btn btn-primary active'} %></td>
+            <td><%= link_to 'Edit', edit_units_of_measure_path(units_of_measure), 
+              html_options = {class: 'btn btn-warning active'} %></td>
+            <td><%= button_to 'Destroy', units_of_measure,
+                method: :delete,
+                class: 'btn btn-danger active',
+                data: { confirm: 'Are you sure?  This will also delete any names, comments, and role assignments that go along with this unit type.' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>

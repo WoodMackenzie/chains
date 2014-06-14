@@ -1,6 +1,8 @@
-<h1>Editing units_of_measure</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Edit Unit of Measurement</h4>
+  </div>
+  <%= render 'form' %>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @units_of_measure %> |
-<%= link_to 'Back', units_of_measures_path %>
+<%= link_to 'Back', @unit_of_measure, html_options = {class: 'btn btn-default'}  %>

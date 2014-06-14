@@ -25,6 +25,8 @@ class UnitsOfMeasuresController < ApplicationController
   # POST /units_of_measures.json
   def create
     @units_of_measure = UnitsOfMeasure.new(units_of_measure_params)
+    @units_of_measure.user_id = current_user.id
+    @units_of_measure.measure_type_id = MeasureType.where('description = ?', measure_type_params[:measure_type_description]).first.id
 
     respond_to do |format|
       if @units_of_measure.save
@@ -40,6 +42,8 @@ class UnitsOfMeasuresController < ApplicationController
   # PATCH/PUT /units_of_measures/1
   # PATCH/PUT /units_of_measures/1.json
   def update
+    @units_of_measure.measure_type_id = MeasureType.where('description = ?', measure_type_params[:measure_type_description]).first.id
+    @units_of_measure.user_id = current_user.id
     respond_to do |format|
       if @units_of_measure.update(units_of_measure_params)
         format.html { redirect_to @units_of_measure, notice: 'Units of measure was successfully updated.' }
@@ -70,5 +74,9 @@ class UnitsOfMeasuresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def units_of_measure_params
       params.require(:units_of_measure).permit(:user_id, :description, :measure_type_id)
+    end
+
+    def measure_type_params
+      params.require(:units_of_measure).permit(:measure_type_description)
     end
 end
