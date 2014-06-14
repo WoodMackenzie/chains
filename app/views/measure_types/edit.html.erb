@@ -1,6 +1,8 @@
-<h1>Editing measure_type</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Edit Canonical Meaurement Type</h4>
+  </div>
+  <%= render 'form' %>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @measure_type %> |
-<%= link_to 'Back', measure_types_path %>
+<%= link_to 'Back', measure_types_path, html_options = {class: 'btn btn-primary active'} %>

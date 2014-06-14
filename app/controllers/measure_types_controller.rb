@@ -25,6 +25,7 @@ class MeasureTypesController < ApplicationController
   # POST /measure_types.json
   def create
     @measure_type = MeasureType.new(measure_type_params)
+    @measure_type.user_id = current_user.id
 
     respond_to do |format|
       if @measure_type.save
@@ -40,6 +41,7 @@ class MeasureTypesController < ApplicationController
   # PATCH/PUT /measure_types/1
   # PATCH/PUT /measure_types/1.json
   def update
+    @measure_type.user_id = current_user.id
     respond_to do |format|
       if @measure_type.update(measure_type_params)
         format.html { redirect_to @measure_type, notice: 'Measure type was successfully updated.' }

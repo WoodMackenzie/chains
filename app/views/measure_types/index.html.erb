@@ -1,29 +1,33 @@
-<h1>Listing measure_types</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Description</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @measure_types.each do |measure_type| %>
-      <tr>
-        <td><%= measure_type.user_id %></td>
-        <td><%= measure_type.description %></td>
-        <td><%= link_to 'Show', measure_type %></td>
-        <td><%= link_to 'Edit', edit_measure_type_path(measure_type) %></td>
-        <td><%= link_to 'Destroy', measure_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Measure type', new_measure_type_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Canonical Measurement Types</h4>
+  </div>
+  <div class="panel-body">
+    <a href="/measure_types/new" class="btn btn-success active" role="button">Create New Measurement Type</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Canonical Measurement Type</th>
+          <th>Last Updated By</th>
+          <th>Last Updated On</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @measure_types.each do |measure_type| %>
+          <tr>
+            <td><%= measure_type.description %></td>
+            <td><%= User.find(measure_type.user_id).full_name %></td>
+            <td><%= measure_type.updated_at %></td>
+            <td><%= link_to 'Edit', 
+              edit_measure_type_path(measure_type), 
+              html_options = {class: 'btn btn-warning active'} %></td>
+            <td><%= link_to 'Destroy', 
+              measure_type, method: :delete, class: 'btn btn-danger active',
+              data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>

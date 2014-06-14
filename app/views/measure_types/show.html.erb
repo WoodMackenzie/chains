@@ -1,14 +1,47 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>User:</strong>
-  <%= @measure_type.user_id %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @measure_type.description %>
-</p>
-
-<%= link_to 'Edit', edit_measure_type_path(@measure_type) %> |
-<%= link_to 'Back', measure_types_path %>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Canonical Measurement Type</h4>
+    </div>
+    <div class="panel-body">
+      <div class="form">
+        <div class="form-group">
+          <label>Canonical Measurement Type:</label>
+          <p class="form-control-static">
+            <%= @measure_type.description %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated By:</label>
+          <p class="form-control-static">
+            <%= User.find(@measure_type.user_id).full_name %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated:</label>
+          <p class="form-control-static">
+            <%= time_ago_in_words(@measure_type.updated_at) + " ago" %>
+          </p>
+        </div>
+      </div>
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <%= button_to 'Edit', edit_measure_type_path(@measure_type),
+            class: 'btn btn-warning active',
+            method: :get %>
+        </div> 
+        <div class="btn-group">
+          <%= button_to 'Back', measure_types_path,
+            class: 'btn btn-primary active',
+            method: :get %>
+        </div>
+        <div class="btn-group">    
+          <%= button_to 'Destroy', @measure_type,
+            method: :delete,
+            class: 'btn btn-danger active',
+            data: { confirm: 'Are you sure?  This will also delete any names, comments, and role assignments that go along with this organization.' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
