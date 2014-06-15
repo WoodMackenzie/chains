@@ -25,6 +25,7 @@ class CommoditiesController < ApplicationController
   # POST /commodities.json
   def create
     @commodity = Commodity.new(commodity_params)
+    @commodity.user_id = current_user.id
 
     respond_to do |format|
       if @commodity.save
@@ -40,6 +41,7 @@ class CommoditiesController < ApplicationController
   # PATCH/PUT /commodities/1
   # PATCH/PUT /commodities/1.json
   def update
+    @commodity.user_id = current_user.id
     respond_to do |format|
       if @commodity.update(commodity_params)
         format.html { redirect_to @commodity, notice: 'Commodity was successfully updated.' }

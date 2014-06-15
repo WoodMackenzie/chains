@@ -1,29 +1,36 @@
-<h1>Listing commodities</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Description</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @commodities.each do |commodity| %>
-      <tr>
-        <td><%= commodity.user_id %></td>
-        <td><%= commodity.description %></td>
-        <td><%= link_to 'Show', commodity %></td>
-        <td><%= link_to 'Edit', edit_commodity_path(commodity) %></td>
-        <td><%= link_to 'Destroy', commodity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Commodity', new_commodity_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Commodities</h4>
+  </div>
+  <div class="panel-body">
+    <a href="/commodities/new" class="btn btn-success active" role="button">Create New Commodity</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Commodity</th>
+          <th>Last Updated By</th>
+          <th>Last Updated On</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @commodities.each do |commodity| %>
+          <tr>
+            <td><%= commodity.description %></td>
+            <td><%= User.find(commodity.user_id).full_name %></td>
+            <td><%= commodity.updated_at %></td>
+            <td><%= link_to 'Show', 
+              commodity, 
+              html_options = {class: 'btn btn-primary active'} %></td>
+            <td><%= link_to 'Edit', 
+              edit_commodity_path(commodity), 
+              html_options = {class: 'btn btn-warning active'} %></td>
+            <td><%= link_to 'Destroy', 
+              commodity, method: :delete, class: 'btn btn-danger active',
+              data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>

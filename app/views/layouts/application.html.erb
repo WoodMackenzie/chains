@@ -25,9 +25,27 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><a href="/processing_units">Processing Units</a></li>
-          <li><a href="/organizations">Organizations</a></li>
-          <li><a href="/comments">Comments</a></li>
-          <li><a href="/unit_types">Unit Types</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li role="presentation" class="dropdown-header">User-Editable Tables</li>
+              <li><a href="/organizations">Organizations</a></li>
+              <li><a href="/unit_types">Processing Unit Types</a></li>
+              <li><a href="/throughputs">Processing Unit Throughputs</a></li>
+              <li class="divider"></li>
+              <li role="presentation" class="dropdown-header">Admin-Editable Tables</li>
+              <li><a href="/commodities">Commodities</a></li>
+              <li><a href="/comments">Comments</a></li>
+              <li><a href="/names">Names</a></li>
+              <li><a href="/roles">Roles</a></li>
+              <li><a href="/role_assignments">Role Assignments</a></li>
+              <li class="divider"></li>
+              <li role="presentation" class="dropdown-header">Canonical Tables</li>
+              <li><a href="/units_of_measures">Units of Measurement</a></li>
+              <li><a href="/measure_types">Canonical Measurements</a></li>
+              <li><a href="/throughput_metrics">Types of Throughput</a></li>
+            </ul>
+          </li>
         </ul>
 				<ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
