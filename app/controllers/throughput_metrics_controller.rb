@@ -25,6 +25,7 @@ class ThroughputMetricsController < ApplicationController
   # POST /throughput_metrics.json
   def create
     @throughput_metric = ThroughputMetric.new(throughput_metric_params)
+    @throughput_metric.user_id = current_user.id
 
     respond_to do |format|
       if @throughput_metric.save
@@ -40,6 +41,8 @@ class ThroughputMetricsController < ApplicationController
   # PATCH/PUT /throughput_metrics/1
   # PATCH/PUT /throughput_metrics/1.json
   def update
+    @throughput_metric.user_id = current_user.id
+    
     respond_to do |format|
       if @throughput_metric.update(throughput_metric_params)
         format.html { redirect_to @throughput_metric, notice: 'Throughput metric was successfully updated.' }

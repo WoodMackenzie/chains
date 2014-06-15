@@ -1,14 +1,47 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>User:</strong>
-  <%= @throughput_metric.user_id %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @throughput_metric.description %>
-</p>
-
-<%= link_to 'Edit', edit_throughput_metric_path(@throughput_metric) %> |
-<%= link_to 'Back', throughput_metrics_path %>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Type of Throughput</h4>
+    </div>
+    <div class="panel-body">
+      <div class="form">
+        <div class="form-group">
+          <label>Type of Throughput:</label>
+          <p class="form-control-static">
+            <%= @throughput_metric.description %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated By:</label>
+          <p class="form-control-static">
+            <%= User.find(@throughput_metric.user_id).full_name %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated:</label>
+          <p class="form-control-static">
+            <%= time_ago_in_words(@throughput_metric.updated_at) + " ago" %>
+          </p>
+        </div>
+      </div>
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <%= button_to 'Edit', edit_throughput_metric_path(@throughput_metric),
+            class: 'btn btn-warning active',
+            method: :get %>
+        </div> 
+        <div class="btn-group">
+          <%= button_to 'Back', throughput_metrics_path,
+            class: 'btn btn-primary active',
+            method: :get %>
+        </div>
+        <div class="btn-group">    
+          <%= button_to 'Destroy', @throughput_metric,
+            method: :delete,
+            class: 'btn btn-danger active',
+            data: { confirm: 'Are you sure?  This will also delete any names, comments, and role assignments that go along with this organization.' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
