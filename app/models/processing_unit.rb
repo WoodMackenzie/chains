@@ -6,6 +6,7 @@ class ProcessingUnit < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :role_holder_assignments, as: :holder, class_name: "RoleAssignment", dependent: :destroy
   has_many :role_subject_assignments, as: :subject, class_name: "RoleAssignment", dependent: :destroy
+  has_many :throughputs, dependent: :destroy
 
   def name_history
     self.names.order(active_date: :desc).order(updated_at: :desc)
@@ -23,6 +24,14 @@ class ProcessingUnit < ActiveRecord::Base
     if self.historical_names(view_date).first
       self.historical_names(view_date).first.name
     end
+  end
+
+  def self.processing_unit_list(view_date)
+    array = Array.new
+    ProcessingUnit.all.each do |processing_unit|
+      array.push(processing_unit.latest_historical_name(view_date))
+    end
+    return array
   end
 
   def initial_name

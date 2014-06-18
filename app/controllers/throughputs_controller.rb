@@ -14,7 +14,8 @@ class ThroughputsController < ApplicationController
 
   # GET /throughputs/new
   def new
-    @throughput = Throughput.new
+    @throughput = Throughput.new(:unit_id => params[:unit_id], :metric_id => params[:metric_id])
+    @throughput.user_id = current_user.id
   end
 
   # GET /throughputs/1/edit
@@ -40,6 +41,7 @@ class ThroughputsController < ApplicationController
   # PATCH/PUT /throughputs/1
   # PATCH/PUT /throughputs/1.json
   def update
+    @throughput.user_id = current_user.id
     respond_to do |format|
       if @throughput.update(throughput_params)
         format.html { redirect_to @throughput, notice: 'Throughput was successfully updated.' }
@@ -69,6 +71,6 @@ class ThroughputsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def throughput_params
-      params.require(:throughput).permit(:user_id, :unit_id, :metric_id, :amount_unit_id, :time_unit_id, :commodity_id, :active_date)
+      params.require(:throughput).permit(:user_id, :unit_id, :metric_id, :amount_unit_id, :time_unit_id, :commodity_id, :value, :active_date)
     end
 end

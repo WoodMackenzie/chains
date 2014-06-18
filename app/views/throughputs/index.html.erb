@@ -1,39 +1,36 @@
-<h1>Listing throughputs</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Unit</th>
-      <th>Metric</th>
-      <th>Amount unit</th>
-      <th>Time unit</th>
-      <th>Commodity</th>
-      <th>Active date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @throughputs.each do |throughput| %>
-      <tr>
-        <td><%= throughput.user_id %></td>
-        <td><%= throughput.unit_id %></td>
-        <td><%= throughput.metric_id %></td>
-        <td><%= throughput.amount_unit_id %></td>
-        <td><%= throughput.time_unit_id %></td>
-        <td><%= throughput.commodity_id %></td>
-        <td><%= throughput.active_date %></td>
-        <td><%= link_to 'Show', throughput %></td>
-        <td><%= link_to 'Edit', edit_throughput_path(throughput) %></td>
-        <td><%= link_to 'Destroy', throughput, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Throughput', new_throughput_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Processing Unit Throughputs</h4>
+  </div>
+  <div class="panel-body">
+    <a href="/throughputs/new" class="btn btn-success active" role="button">Create New Throughput</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Unit Name</th>
+          <th>Metric</th>
+          <th>Commodity</th>          
+          <th>Amount</th>
+          <th>Time</th>
+          <th>Value</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @throughputs.each do |throughput| %>
+          <tr>
+            <td><%= ProcessingUnit.find(throughput.unit_id).latest_historical_name(Time.now) %></td>
+            <td><%= ThroughputMetric.find(throughput.metric_id).description %></td>
+            <td><%= Commodity.find(throughput.commodity_id).description %></td>
+            <td><%= UnitsOfMeasure.find(throughput.amount_unit_id).description %></td>
+            <td><%= UnitsOfMeasure.find(throughput.time_unit_id).description %></td>
+            <td><%= Here Goes a Number %></td>
+            <td><%= link_to 'Show', 
+              throughput, 
+              html_options = {class: 'btn btn-primary active'} %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>

@@ -1,6 +1,9 @@
-<h1>Editing throughput</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Edit Throughput<h4>
+  </div>
+  <%= render 'form' %>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @throughput %> |
-<%= link_to 'Back', throughputs_path %>
+<%= link_to 'Show', @throughput, html_options = {class: 'btn btn-success active'} %>
+<%= link_to 'Back', throughput_metrics_path, html_options = {class: 'btn btn-primary active'} %>

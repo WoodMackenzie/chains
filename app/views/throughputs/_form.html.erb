@@ -1,17 +1,56 @@
-<%= simple_form_for(@throughput) do |f| %>
-  <%= f.error_notification %>
+<div class="panel-body">
+  <%= simple_form_for(@throughput) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :user_id %>
-    <%= f.input :unit_id %>
-    <%= f.input :metric_id %>
-    <%= f.input :amount_unit_id %>
-    <%= f.input :time_unit_id %>
-    <%= f.input :commodity_id %>
-    <%= f.input :active_date %>
-  </div>
+    <div class="form-inputs">
+      <%= f.input :user_id, label: false,
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control', type: 'hidden' } %>
+      <% if @throughput.unit_id.nil? %>
+        <%= f.input :unit_description, collection: ProcessingUnit.processing_unit_list(Time.now).sort, 
+          label: 'Processing Unit',
+          wrapper_html: { class: 'form-group' },
+          input_html: { class: 'form-control' } %>
+      <% else %>
+        <%= f.input :unit_description,  
+          label: 'Processing Unit',
+          wrapper_html: { class: 'form-group' },
+          input_html: { class: 'form-control', value: ProcessingUnit.find(@throughput.unit_id).latest_historical_name(Time.now) } %>
+      <% end %>
+      <% if @throughput.metric_id.nil? %>
+        <%= f.input :metric_description, collection: ThroughputMetric.throughput_metric_list.sort,
+          wrapper_html: { class: 'form-group' },
+          input_html: { class: 'form-control' } %>
+      <% else %>
+        <%= f.input :metric_description,
+          wrapper_html: { class: 'form-group' },
+          input_html: { class: 'form-control', value: ThroughputMetric.find(@throughput.metric_id).description } %>
+      <% end %>
+      <%= f.input :amount_unit_description, collection: UnitsOfMeasure.amount_unit_list.sort, label: 'Units of Mass / Volume',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>
+      <%= f.input :time_unit_description, collection: UnitsOfMeasure.time_unit_list.sort, label: 'Units of Time',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>
+      <%= f.input :commodity_description, collection: Commodity.commodity_list.sort, label: 'Commodity',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>
+      <%= f.input :value, label: 'Value',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>
+      <%= f.input :active_date,
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' }%>
+      <%= f.button :submit,
+        value: "Create New Throughput",
+        class: 'btn btn-success active' %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+  <% end %>
+</div>
+
+
+
+
+
+
