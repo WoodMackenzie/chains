@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618151259) do
+ActiveRecord::Schema.define(version: 20140618164640) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20140618151259) do
 
   create_table "throughputs", force: true do |t|
     t.integer  "user_id"
-    t.integer  "unit_id"
+    t.integer  "processing_unit_id"
     t.integer  "metric_id"
     t.integer  "amount_unit_id"
     t.integer  "time_unit_id"

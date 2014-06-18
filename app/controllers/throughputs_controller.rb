@@ -14,7 +14,7 @@ class ThroughputsController < ApplicationController
 
   # GET /throughputs/new
   def new
-    @throughput = Throughput.new(:unit_id => params[:unit_id], :metric_id => params[:metric_id])
+    @throughput = Throughput.new(:processing_unit_id => params[:processing_unit_id], :metric_id => params[:metric_id])
     @throughput.user_id = current_user.id
   end
 
@@ -26,6 +26,12 @@ class ThroughputsController < ApplicationController
   # POST /throughputs.json
   def create
     @throughput = Throughput.new(throughput_params)
+    @throughput.processing_unit_id = ProcessingUnit.find(Name.where("name = ? AND nameable_type = ?", 
+      extra_params[:unit_description], "ProcessingUnit").first.nameable_id).id
+    @throughput.metric_id = ThroughputMetric.where("description = ?", extra_params[:metric_description]).first.id
+    @throughput.amount_unit_id = UnitsOfMeasure.where("description = ?", extra_params[:amount_unit_description]).first.id
+    @throughput.time_unit_id = UnitsOfMeasure.where("description = ?", extra_params[:time_unit_description]).first.id
+    @throughput.commodity_id = Commodity.where("description = ?", extra_params[:commodity_description]).first.id
 
     respond_to do |format|
       if @throughput.save
@@ -42,6 +48,13 @@ class ThroughputsController < ApplicationController
   # PATCH/PUT /throughputs/1.json
   def update
     @throughput.user_id = current_user.id
+    @throughput.processing_unit_id = ProcessingUnit.find(Names.where("name = ? AND nameable_type = ?", 
+      extra_params[:unit_description], "ProcessingUnit").first.nameable_id)
+    @throughput.metric_id = ThroughputMetric.where("description = ?", extra_params[:metric_description]).first.id
+    @throughput.amount_unit_id = UnitsOfMeasure.where("description = ?", extra_params[:amount_unit_description]).first.id
+    @throughput.time_unit_id = UnitsOfMeasure.where("description = ?", extra_params[:time_unit_description]).first.id
+    @throughput.commodity_id = Commodity.where("description = ?", extra_params[:commodity_description]).first.id
+
     respond_to do |format|
       if @throughput.update(throughput_params)
         format.html { redirect_to @throughput, notice: 'Throughput was successfully updated.' }
@@ -71,6 +84,10 @@ class ThroughputsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def throughput_params
-      params.require(:throughput).permit(:user_id, :unit_id, :metric_id, :amount_unit_id, :time_unit_id, :commodity_id, :value, :active_date)
+      params.require(:throughput).permit(:user_id, :processing_unit_id, :metric_id, :amount_unit_id, :time_unit_id, :commodity_id, :value, :active_date)
+    end
+
+    def extra_params
+      params.require(:throughput).permit(:unit_description, :metric_description, :amount_unit_description, :time_unit_description, :commodity_description)
     end
 end

@@ -1,39 +1,77 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>User:</strong>
-  <%= @throughput.user_id %>
-</p>
-
-<p>
-  <strong>Unit:</strong>
-  <%= @throughput.unit_id %>
-</p>
-
-<p>
-  <strong>Metric:</strong>
-  <%= @throughput.metric_id %>
-</p>
-
-<p>
-  <strong>Amount unit:</strong>
-  <%= @throughput.amount_unit_id %>
-</p>
-
-<p>
-  <strong>Time unit:</strong>
-  <%= @throughput.time_unit_id %>
-</p>
-
-<p>
-  <strong>Commodity:</strong>
-  <%= @throughput.commodity_id %>
-</p>
-
-<p>
-  <strong>Active date:</strong>
-  <%= @throughput.active_date %>
-</p>
-
-<%= link_to 'Edit', edit_throughput_path(@throughput) %> |
-<%= link_to 'Back', throughputs_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>
+        Throughput - <%= ProcessingUnit.find(@throughput.processing_unit_id).latest_historical_name(Time.now) %>
+    </h4>
+  </div>
+  <div class="panel-body">
+    <div class="form">
+      <div class="form-group">
+        <label>Processing Unit:</label>
+        <p class="form-control-static">
+          <%= ProcessingUnit.find(@throughput.processing_unit_id).latest_historical_name(Time.now) %>
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Throughput Description:</label>
+          <p class="form-control-static">
+            <%= ThroughputMetric.find(@throughput.metric_id).description %>
+          </p>
+      </div>
+      <div class="form-group">
+        <label>Value:</label>
+          <p class="form-control-static">
+            <%= @throughput.value %>
+          </p>
+      </div>
+      <div class="form-group">
+        <label>Units of Mass / Volume:</label>
+        <p class="form-control-static">
+          <%= UnitsOfMeasure.find(@throughput.amount_unit_id).description %>
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Units of Time:</label>
+        <p class="form-control-static">
+          <%= UnitsOfMeasure.find(@throughput.time_unit_id).description %>
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Commodity:</label>
+        <p class="form-control-static">
+          <%= Commodity.find(@throughput.commodity_id).description %>
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Valid As Of:</label>
+        <p class="form-control-static">
+          <%= @throughput.active_date %>
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Last Updated:</label>
+        <p class="form-control-static">
+          <%= time_ago_in_words(@throughput.updated_at) + " ago" %>
+        </p>
+      </div>
+    </div>
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= button_to 'Edit', edit_throughput_path(@throughput),
+          class: 'btn btn-warning active',
+          method: :get %>
+      </div> 
+      <div class="btn-group">
+        <%= button_to 'Back', throughputs_path,
+          class: 'btn btn-primary active',
+          method: :get %>
+      </div>
+      <div class="btn-group">    
+        <%= button_to 'Destroy', @throughput,
+          method: :delete,
+          class: 'btn btn-danger active',
+          data: { confirm: 'Are you sure?  This will also delete all names, comments, and role assignments that go along with this processing unit.' } %>
+      </div>
+    </div>
+  </div>
+</div>

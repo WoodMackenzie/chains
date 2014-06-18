@@ -19,12 +19,12 @@
       <tbody>
         <% @throughputs.each do |throughput| %>
           <tr>
-            <td><%= ProcessingUnit.find(throughput.unit_id).latest_historical_name(Time.now) %></td>
+            <td><%= ProcessingUnit.find(throughput.processing_unit_id).latest_historical_name(Time.now) %></td>
             <td><%= ThroughputMetric.find(throughput.metric_id).description %></td>
             <td><%= Commodity.find(throughput.commodity_id).description %></td>
             <td><%= UnitsOfMeasure.find(throughput.amount_unit_id).description %></td>
             <td><%= UnitsOfMeasure.find(throughput.time_unit_id).description %></td>
-            <td><%= Here Goes a Number %></td>
+            <td><%= throughput.value %></td>
             <td><%= link_to 'Show', 
               throughput, 
               html_options = {class: 'btn btn-primary active'} %></td>
