@@ -1,0 +1,11 @@
+<div class="panel-body">
+  <%= simple_form_for(@location_granularity) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :description, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+    <%= f.button :submit,
+      value: "Create New Location Granularity",
+      class: 'btn btn-success active' %>
+  <% end %>
+</div>

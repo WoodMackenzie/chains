@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Location Granularities</h4>
+  </div>
+  <div class="panel-body">
+    <a href="/location_granularities/new" class="btn btn-success active" role="button">Create New Location Granularity</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Location Granularity</th>
+          <th>Last Updated By</th>
+          <th>Last Updated On</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @location_granularities.each do |location_granularity| %>
+          <tr>
+            <td><%= location_granularity.description %></td>
+            <td><%= User.find(location_granularity.user_id).full_name %></td>
+            <td><%= location_granularity.updated_at.strftime("%m/%d/%Y %I:%M %p")  %></td>
+            <td><%= link_to 'Edit', 
+              edit_location_granularity_path(location_granularity), 
+              html_options = {class: 'btn btn-warning active'} %></td>
+            <td><%= link_to 'Destroy', 
+              location_granularity, method: :delete, class: 'btn btn-danger active',
+              data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>

@@ -27,7 +27,7 @@
                 <% end %>
               </td>
               <td><%= User.find(unit_type.user_id).full_name %></td>
-              <td><%= unit_type.created_at %></td>
+              <td><%= unit_type.created_at.strftime("%m/%d/%Y %I:%M %p") %></td>
               <td><%= link_to 'Show', unit_type, html_options = {class: 'btn btn-primary active'} %></td>
               <td><%= link_to 'Edit', edit_unit_type_path(unit_type), 
                 html_options = {class: 'btn btn-warning active'} %></td>

@@ -65,11 +65,30 @@ class ProcessingUnit < ActiveRecord::Base
   end
 
   def full_location
-    if self.city.nil?
+    if self.state.nil? and self.city != nil
+      self.city + ", " + self.country
+    elsif self.city.nil? and self.state != nil
       self.state + ", " + self.country
+    elsif self.city.nil? and self.state.nil?
+      self.country
     else
       self.city + ", " + self.state + ", " + self.country
     end
+  end
+
+  def coordinate_boolean
+  end
+
+  def city_boolean
+  end
+
+  def state_boolean
+  end
+  
+  def country_boolean
+  end
+
+  def location_granularity_description
   end
 
 end

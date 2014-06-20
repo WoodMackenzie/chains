@@ -1,4 +1,6 @@
 Chains::Application.routes.draw do
+  resources :location_granularities
+
   resources :measure_types
 
   resources :units_of_measures

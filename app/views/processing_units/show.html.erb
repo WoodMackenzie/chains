@@ -74,9 +74,9 @@
       <thead>
         <tr>
           <th>Commodity</th>
+          <th>Value</th>
           <th>Amount</th>
           <th>Time</th>
-          <th>Value</th>
           <th>Valid As Of</th>
           <th>User</th>
           <th>Last Updated</th>
@@ -87,14 +87,14 @@
         <% @processing_unit.throughputs.each do |throughput| %>
           <tr>
             <td><%= Commodity.find(throughput.commodity_id).description %></td>
-            <td><%= UnitsOfMeasure.find(throughput.amount_id).description %></td>
-            <td><%= UnitsOfMeasure.find(throughput.time_id).description %></td>
             <td><%= throughput.value %></td>
-            <td><%= throughput.active_date %></td>
+            <td><%= UnitsOfMeasure.find(throughput.amount_unit_id).description %></td>
+            <td><%= UnitsOfMeasure.find(throughput.time_unit_id).description %></td>
+            <td><%= throughput.active_date.strftime("%m/%d/%Y") %></td>
             <td><%= User.find(throughput.user_id).full_name %></td>
-            <td><%= throughput.updated_at %></td>
+            <td><%= time_ago_in_words(throughput.updated_at) %> ago</td>
             <td><%= link_to 'Show', 
-              name, 
+              throughput, 
               html_options = {class: 'btn btn-primary active'} %></td>
           </tr>
         <% end %>

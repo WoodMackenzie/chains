@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618164640) do
+ActiveRecord::Schema.define(version: 20140620144357) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 20140618164640) do
   end
 
   create_table "commodities", force: true do |t|
+    t.integer  "user_id"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "location_granularities", force: true do |t|
     t.integer  "user_id"
     t.string   "description"
     t.datetime "created_at"
@@ -64,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140618164640) do
     t.string   "state"
     t.string   "country"
     t.integer  "unit_type_id"
+    t.integer  "location_granularity_id"
   end
 
   create_table "role_assignments", force: true do |t|

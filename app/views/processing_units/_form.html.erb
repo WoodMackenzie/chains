@@ -15,12 +15,28 @@
     <%= f.input :unit_type_description, collection: UnitType.unit_type_list.values.sort, label: 'Unit Type',
       wrapper_html: { class: 'form-group' },
       input_html: { class: 'form-control' } %>
-    <%= f.input :latitude, placeholder: '0.000000',
-      wrapper_html: { class: 'form-group' },
-      input_html: { class: 'form-control' } %>
-    <%= f.input :longitude, placeholder: '0.000000',
-      wrapper_html: { class: 'form-group' },
-      input_html: { class: 'form-control' } %>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Location</h4>
+        </div>
+        <div class="panel-body">
+          <p><strong>Location Granularity</strong></p>
+          <p>If you are identifying a processing unit by <strong>coordinates</strong>, you need only input latitude and longitude information; if you are identifying a processing unit by <strong>city</strong>, <strong>state</strong>, <strong>province</strong>, or <strong>country</strong> data, only fill in fields of available information.</p>
+          <div id="location_granularity_description" class="btn-group">
+            <button type="button" class="btn btn-default">Coordinates</button>
+            <button type="button" class="btn btn-default">City</button>
+            <button type="button" class="btn btn-default">State/Province</button>
+            <button type="button" class="btn btn-default">Country</button>
+          </div>
+          <p></p>
+          <%= f.input :latitude, placeholder: '0.000000',
+            wrapper_html: { class: 'form-group' },
+            input_html: { class: 'form-control' } %>
+          <%= f.input :longitude, placeholder: '0.000000',
+            wrapper_html: { class: 'form-group' },
+            input_html: { class: 'form-control' } %>
+        </div>
+    </div>
     <%= f.button :submit, 
       label: "Create Processing Unit",
       class: 'btn btn-success' %>

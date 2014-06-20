@@ -87,7 +87,7 @@
                 <td><%= unit_type_variable.description %></td>
                 <td><%= UnitType.find(unit_type_variable.parent_id).description %></td>
                 <td><%= User.find(unit_type_variable.user_id).full_name %></td>
-                <td><%= unit_type_variable.created_at %></td>
+                <td><%= unit_type_variable.created_at.strftime("%m/%d/%Y %I:%M %p") %></td>
                 <td><%= link_to 'Show', unit_type_variable, html_options = {class: 'btn btn-primary active'} %></td>
                 <td><%= link_to 'Edit', edit_unit_type_path(unit_type_variable), html_options = {class: 'btn btn-warning active'} %></td>
                 <td>

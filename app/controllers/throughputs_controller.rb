@@ -48,8 +48,8 @@ class ThroughputsController < ApplicationController
   # PATCH/PUT /throughputs/1.json
   def update
     @throughput.user_id = current_user.id
-    @throughput.processing_unit_id = ProcessingUnit.find(Names.where("name = ? AND nameable_type = ?", 
-      extra_params[:unit_description], "ProcessingUnit").first.nameable_id)
+    @throughput.processing_unit_id = ProcessingUnit.find(Name.where("name = ? AND nameable_type = ?", 
+      extra_params[:unit_description], "ProcessingUnit").first.nameable_id).id
     @throughput.metric_id = ThroughputMetric.where("description = ?", extra_params[:metric_description]).first.id
     @throughput.amount_unit_id = UnitsOfMeasure.where("description = ?", extra_params[:amount_unit_description]).first.id
     @throughput.time_unit_id = UnitsOfMeasure.where("description = ?", extra_params[:time_unit_description]).first.id
