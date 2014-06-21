@@ -54,7 +54,7 @@ group :test do
   gem 'shoulda'
 end
 
-ruby "1.9.3p484"
+ruby "1.9.3"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
