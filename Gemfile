@@ -14,6 +14,7 @@ end
 
 group :production do
 	gem 'pg'
+	gem 'rails_12factor'
 end
 
 # Use SCSS for stylesheets
@@ -52,6 +53,8 @@ group :test do
 # Helps test common rails functionality
   gem 'shoulda'
 end
+
+ruby "1.9.3p484"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
