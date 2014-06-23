@@ -26,6 +26,8 @@ gem 'simple_form'
 
 gem 'geocoder'
 
+gem 'country_select'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
