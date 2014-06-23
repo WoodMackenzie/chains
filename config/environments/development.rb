@@ -30,3 +30,6 @@ Chains::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 end
+
+
+Geocoder.configure(:http_proxy => "http://wmhproxy2:8080")

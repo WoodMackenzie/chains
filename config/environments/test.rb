@@ -37,3 +37,6 @@ Chains::Application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 end
+
+
+Geocoder.configure(:http_proxy => "http://wmhproxy2:8080")
