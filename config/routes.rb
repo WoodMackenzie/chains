@@ -1,4 +1,8 @@
 Chains::Application.routes.draw do
+
+  get "registrations/new"
+  get "registrations/create"
+
   resources :location_granularities
 
   resources :measure_types
@@ -25,7 +29,14 @@ Chains::Application.routes.draw do
 
   resources :processing_units
 
-  devise_for :users
+  if Rails.env.production?
+    devise_for :users, :controllers => {:registrations => "registrations"}
+  else
+    # devise_for :users
+    #Below line is for testing purposes, to see if this piece of code omits new user registrations from program.
+    devise_for :users, :controllers => {:registrations => "registrations"}
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
