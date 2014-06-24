@@ -28,10 +28,39 @@ class ProcessingUnitsController < ApplicationController
 
     @processing_unit = ProcessingUnit.new(processing_unit_params)
     @processing_unit.user_id = current_user.id
-    geoarray = Geocoder.search(@processing_unit.reverse_geocode)
-    @processing_unit.city = geoarray[0].city
-    @processing_unit.state = geoarray[0].state
-    @processing_unit.country = geoarray[0].country
+    if params[:granularity] == "coordinates"
+      geoarray = Geocoder.search(@processing_unit.reverse_geocode)
+      @processing_unit.city = geoarray[0].city
+      @processing_unit.state = geoarray[0].state
+      @processing_unit.country = geoarray[0].country
+    else
+      @processing_unit.city = nil
+      @processing_unit.state = nil
+      @processing_unit.country = nil
+      temp_string = location_params[:country_variable]
+      if location_params[:state_variable] != nil and location_params[:state_variable] != ""
+        temp_string = [location_params[:state_variable], temp_string].compact.join(', ')
+      end
+      if location_params[:city_variable] != nil and location_params[:city_variable] != ""
+        temp_string = [location_params[:city_variable], temp_string].compact.join(', ')
+      end
+      @processing_unit.address = temp_string
+      geoarray = Geocoder.search(@processing_unit.geocode)
+      @processing_unit.latitude = nil
+      @processing_unit.longitude = nil
+      @processing_unit.address = nil
+      if params[:granularity] == "city"
+        @processing_unit.city = geoarray[0].city
+        @processing_unit.state = geoarray[0].state
+        @processing_unit.country = geoarray[0].country
+      elsif params[:granularity] == "state"
+        @processing_unit.state = geoarray[0].state
+        @processing_unit.country = geoarray[0].country
+      elsif params[:granularity] == "country"
+        @processing_unit.country = geoarray[0].country
+      end
+    end
+    @processing_unit.location_granularity_id = LocationGranularity.where('description = ?', params[:granularity]).first.id
     @processing_unit.unit_type_id = UnitType.unit_type_list.index(unit_type_params[:unit_type_description])
 
     respond_to do |format|
@@ -70,10 +99,39 @@ class ProcessingUnitsController < ApplicationController
   # PATCH/PUT /processing_units/1.json
   def update
     @processing_unit.user_id = current_user.id
-    geoarray = Geocoder.search(@processing_unit.reverse_geocode)
-    @processing_unit.city = geoarray[0].city
-    @processing_unit.state = geoarray[0].state
-    @processing_unit.country = geoarray[0].country
+    if params[:granularity] == "coordinates"
+      geoarray = Geocoder.search(@processing_unit.reverse_geocode)
+      @processing_unit.city = geoarray[0].city
+      @processing_unit.state = geoarray[0].state
+      @processing_unit.country = geoarray[0].country
+    else
+      @processing_unit.city = nil
+      @processing_unit.state = nil
+      @processing_unit.country = nil
+      temp_string = location_params[:country_variable]
+      if location_params[:state_variable] != nil and location_params[:state_variable] != ""
+        temp_string = [location_params[:state_variable], temp_string].compact.join(', ')
+      end
+      if location_params[:city_variable] != nil and location_params[:city_variable] != ""
+        temp_string = [location_params[:city_variable], temp_string].compact.join(', ')
+      end
+      @processing_unit.address = temp_string
+      geoarray = Geocoder.search(@processing_unit.geocode)
+      @processing_unit.latitude = nil
+      @processing_unit.longitude = nil
+      @processing_unit.address = nil
+      if params[:granularity] == "city"
+        @processing_unit.city = geoarray[0].city
+        @processing_unit.state = geoarray[0].state
+        @processing_unit.country = geoarray[0].country
+      elsif params[:granularity] == "state"
+        @processing_unit.state = geoarray[0].state
+        @processing_unit.country = geoarray[0].country
+      elsif params[:granularity] == "country"
+        @processing_unit.country = geoarray[0].country
+      end
+    end
+    @processing_unit.location_granularity_id = LocationGranularity.where('description = ?', params[:granularity]).first.id
     @processing_unit.unit_type_id = UnitType.unit_type_list.index(unit_type_params[:unit_type_description])
     respond_to do |format|
       if @processing_unit.update(processing_unit_params)
@@ -123,7 +181,7 @@ class ProcessingUnitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def processing_unit_params
-      params.require(:processing_unit).permit(:latitude, :longitude, :address, :user_id)
+      params.require(:processing_unit).permit(:granularity, :latitude, :longitude, :address, :user_id)
     end
 
     def name_params
@@ -137,6 +195,14 @@ class ProcessingUnitsController < ApplicationController
     def unit_type_params
       params.require(:processing_unit).permit(:unit_type_description)
     end
+
+    def location_params
+      params.require(:processing_unit).permit(:city_variable, :state_variable, :country_variable)
+    end
+
+    # def granularity_params
+    #   params.require(:processing_unit).permit(:granularity)
+    # end
 
     # def search_params
     #   params.require(:processing_unit).permit(:search)

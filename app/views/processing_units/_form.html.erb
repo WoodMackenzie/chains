@@ -22,28 +22,51 @@
         <div class="panel-body">
           <p><strong>Location Granularity</strong></p>
           <p>If you are identifying a processing unit by <strong>coordinates</strong>, you need only input latitude and longitude information; if you are identifying a processing unit by <strong>city</strong>, <strong>state</strong>, <strong>province</strong>, or <strong>country</strong> data, only fill in fields of available information.</p>
-          <div id="location_granularity_description" class="btn-group">
-            <input id="coordinate_level" name="coordinate_level" type="button" class="btn btn-default" value="Coordinates"/>
-            <input id="city_level" name="coordinate_level" type="button" class="btn btn-default" value="City"/>
-            <input id="state_level" name="coordinate_level" type="button" class="btn btn-default" value="State/Province"/>
-            <input id="country_level" name="coordinate_level" type="button" class="btn btn-default" value="Country"/>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h5>
+                <input id="granularity_coordinates" name="granularity" type="radio" checked="true" value="coordinates"/>
+                <%= label_tag(:granularity_coordinates, "Coordinate-Level") %>
+              </h5>
+            </div>
+  <!--             <div id="location_granularity_description" class="btn-group">
+                <input id="coordinate_level" name="coordinate_level" type="button" class="btn btn-default" value="Coordinates"/>
+                <input id="city_level" name="city_level" type="button" class="btn btn-default" value="City"/>
+                <input id="state_level" name="state_level" type="button" class="btn btn-default" value="State/Province"/>
+                <input id="country_level" name="country_level" type="button" class="btn btn-default" value="Country"/>
+              </div> -->
+            <div class="panel-body">
+              <%= f.input :latitude, placeholder: '0.000000',
+                wrapper_html: { class: 'form-group' },
+                input_html: { class: 'form-control' } %>
+              <%= f.input :longitude, placeholder: '0.000000',
+                wrapper_html: { class: 'form-group' },
+                input_html: { class: 'form-control' } %>
+            </div>
           </div>
-          <p></p>
-          <%= f.input :latitude, placeholder: '0.000000',
-            wrapper_html: { class: 'form-group' },
-            input_html: { class: 'form-control' } %>
-          <%= f.input :longitude, placeholder: '0.000000',
-            wrapper_html: { class: 'form-group' },
-            input_html: { class: 'form-control' } %>
-          <%= f.input :city, label: 'City',
-            wrapper_html: { class: 'form-group' },
-            input_html: { class: 'form-control' } %>
-          <%= f.input :state, label: 'State',
-            wrapper_html: { class: 'form-group' },
-            input_html: { class: 'form-control' } %>
-          <%= f.input :country, label: 'Country',
-            wrapper_html: { class: 'form-group' },
-            input_html: { class: 'form-control' } %>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h5>
+                <%= radio_button_tag(:granularity, "city") %>
+                <%= label_tag(:granularity_city, "City-Level") %>
+                <%= radio_button_tag(:granularity, "state") %>
+                <%= label_tag(:granularity_state, "State-Level") %>
+                <%= radio_button_tag(:granularity, "country") %>
+                <%= label_tag(:granularity_country, "Country-Level") %>
+              </h5>
+            </div>
+            <div class="panel-body">
+              <%= f.input :city_variable, label: 'City',
+                wrapper_html: { class: 'form-group' },
+                input_html: { class: 'form-control' } %>
+              <%= f.input :state_variable, label: 'State',
+                wrapper_html: { class: 'form-group' },
+                input_html: { class: 'form-control' } %>
+              <%= f.input :country_variable, label: 'Country',
+                wrapper_html: { class: 'form-group' },
+                input_html: { class: 'form-control' } %>
+            </div>
+          </div>
         </div>
     </div>
     <%= f.button :submit, 

@@ -2,6 +2,8 @@ class ProcessingUnit < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
+  geocoded_by :address
+  after_validation :geocode
   has_many :names, as: :nameable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :role_holder_assignments, as: :holder, class_name: "RoleAssignment", dependent: :destroy
@@ -43,6 +45,18 @@ class ProcessingUnit < ActiveRecord::Base
   def unit_type_description
   end
 
+  def granularity
+  end
+
+  def city_variable
+  end
+
+  def state_variable
+  end
+
+  def country_variable
+  end
+
   def self.search(search)
     if search
       array = Array.new
@@ -74,21 +88,6 @@ class ProcessingUnit < ActiveRecord::Base
     else
       self.city + ", " + self.state + ", " + self.country
     end
-  end
-
-  def coordinate_boolean
-  end
-
-  def city_boolean
-  end
-
-  def state_boolean
-  end
-  
-  def country_boolean
-  end
-
-  def location_granularity_description
   end
 
 end
