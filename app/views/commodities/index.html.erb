@@ -9,7 +9,7 @@
         <tr>
           <th>Commodity</th>
           <th>Last Updated By</th>
-          <th>Last Updated On</th>
+          <th>Last Updated</th>
           <th></th>
         </tr>
       </thead>
@@ -18,7 +18,7 @@
           <tr>
             <td><%= commodity.description %></td>
             <td><%= User.find(commodity.user_id).full_name %></td>
-            <td><%= commodity.updated_at %></td>
+            <td><%= time_ago_in_words(commodity.updated_at) %> ago</td>
             <td><%= link_to 'Show', 
               commodity, 
               html_options = {class: 'btn btn-primary active'} %></td>

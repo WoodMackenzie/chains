@@ -9,7 +9,7 @@
         <tr>
           <th>Role</th>
           <th>Last Updated By</th>
-          <th>Last Updated On</th>
+          <th>Last Updated</th>
           <th></th>
         </tr>
       </thead>
@@ -18,7 +18,7 @@
           <tr>
             <td><%= role.role %></td>
             <td><%= User.find(role.user_id).full_name %></td>
-            <td><%= role.updated_at %></td>
+            <td><%= time_ago_in_words(role.updated_at) %> ago</td>
             <td><%= link_to 'Show', 
               role, 
               html_options = {class: 'btn btn-primary active'} %></td>

@@ -54,7 +54,7 @@
           <tr>
             <th>Organizaiton Name</th>
             <th>User Name</th>
-            <th>Last Updated At</th>
+            <th>Last Updated</th>
             <th>Valid As Of</th>
             <th></th>
           </tr>
@@ -64,7 +64,7 @@
             <tr>
               <td><%= name.name %></td>
               <td><%= User.find(name.user_id).full_name %></td>
-              <td><%= name.updated_at %></td>
+              <td><%= time_ago_in_words(name.updated_at) %> ago</td>
               <td><%= name.active_date %></td>
               <td><%= link_to 'Show', 
                 name, 

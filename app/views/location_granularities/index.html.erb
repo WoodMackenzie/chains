@@ -9,7 +9,7 @@
         <tr>
           <th>Location Granularity</th>
           <th>Last Updated By</th>
-          <th>Last Updated On</th>
+          <th>Last Updated</th>
           <th></th>
         </tr>
       </thead>
@@ -18,7 +18,7 @@
           <tr>
             <td><%= location_granularity.description %></td>
             <td><%= User.find(location_granularity.user_id).full_name %></td>
-            <td><%= location_granularity.updated_at.strftime("%m/%d/%Y %I:%M %p")  %></td>
+            <td><%= time_ago_in_words(location_granularity.updated_at) + " ago"  %></td>
             <td><%= link_to 'Edit', 
               edit_location_granularity_path(location_granularity), 
               html_options = {class: 'btn btn-warning active'} %></td>

@@ -10,7 +10,7 @@
           <th>Unit of Measurement</th>
           <th>Measurement Type</th>
           <th>Last Updated By</th>
-          <th>Last Updated On</th>
+          <th>Last Updated</th>
           <th></th>
         </tr>
       </thead>
@@ -20,7 +20,7 @@
             <td><%= units_of_measure.description %></td>
             <td><%= MeasureType.find(units_of_measure.measure_type_id).description %></td>
             <td><%= User.find(units_of_measure.user_id).full_name %></td>
-            <td><%= units_of_measure.updated_at %></td>
+            <td><%= time_ago_in_words(units_of_measure.updated_at) + " ago" %></td>
             <td><%= link_to 'Show', units_of_measure, html_options = {class: 'btn btn-primary active'} %></td>
             <td><%= link_to 'Edit', edit_units_of_measure_path(units_of_measure), 
               html_options = {class: 'btn btn-warning active'} %></td>

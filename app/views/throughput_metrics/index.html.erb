@@ -9,7 +9,7 @@
         <tr>
           <th>Type of Throughput</th>
           <th>Last Updated By</th>
-          <th>Last Updated On</th>
+          <th>Last Updated</th>
           <th></th>
         </tr>
       </thead>
@@ -18,7 +18,7 @@
           <tr>
             <td><%= throughput_metric.description %></td>
             <td><%= User.find(throughput_metric.user_id).full_name %></td>
-            <td><%= throughput_metric.updated_at %></td>
+            <td><%= time_ago_in_words(throughput_metric.updated_at) + " ago" %></td>
             <td><%= link_to 'Show', 
               throughput_metric, 
               html_options = {class: 'btn btn-primary active'} %></td>

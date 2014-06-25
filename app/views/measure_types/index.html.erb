@@ -9,7 +9,7 @@
         <tr>
           <th>Canonical Measurement Type</th>
           <th>Last Updated By</th>
-          <th>Last Updated On</th>
+          <th>Last Updated</th>
           <th></th>
         </tr>
       </thead>
@@ -18,7 +18,7 @@
           <tr>
             <td><%= measure_type.description %></td>
             <td><%= User.find(measure_type.user_id).full_name %></td>
-            <td><%= measure_type.updated_at %></td>
+            <td><%= time_ago_in_words(measure_type.updated_at) + " ago" %></td>
             <td><%= link_to 'Edit', 
               edit_measure_type_path(measure_type), 
               html_options = {class: 'btn btn-warning active'} %></td>
