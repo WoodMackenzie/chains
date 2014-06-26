@@ -138,7 +138,7 @@ class ProcessingUnitsController < ApplicationController
         format.html { redirect_to @processing_unit, notice: 'Processing unit was successfully updated.' }
         format.json { head :no_content }
         if name_params[:initial_name]
-          @name = Name.new
+          @name = Name.where("nameable_id = ? AND nameable_type = ?", @processing_unit.id, "ProcessingUnit").last
           @name.name = name_params[:initial_name]
           @name.user_id = current_user.id
           @name.active_date = Time.now
@@ -146,7 +146,7 @@ class ProcessingUnitsController < ApplicationController
           @name.nameable_type = "ProcessingUnit"
           @name.save
         end
-        @role_assignment = RoleAssignment.new
+        @role_assignment = RoleAssignment.where("subject_id = ? AND subject_type = ?", @processing_unit.id, "ProcessingUnit").last
         @role_assignment.role_id = Role.where('role = ?', 'Operator').first.id
         @role_assignment.holder_id = Name.where("nameable_type = ? AND name = ?", 'Organization', role_assignment_params[:organization_id]).first.nameable_id
         @role_assignment.holder_type = "Organization"

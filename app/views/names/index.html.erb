@@ -10,6 +10,7 @@
           <th>Nameable ID</th>
           <th>Nameable Type</th>
           <th>Name</th>
+          <th>Last Updated</th>
           <th></th>
         </tr>
       </thead>
@@ -20,6 +21,7 @@
             <td><%= name.nameable_id %></td>
             <td><%= name.nameable_type %></td>
             <td><%= name.name %></td>
+            <td><%= time_ago_in_words(name.updated_at) + " ago" %></td>
             <td><%= link_to 'Show', 
               name, 
               html_options = {class: 'btn btn-primary active'} %></td>

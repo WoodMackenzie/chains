@@ -6,15 +6,45 @@
 <div class="panel-body">
   <%= simple_form_for(@processing_unit) do |f| %>
     <%= f.error_notification %>
-    <%= f.input :initial_name, label: 'Processing Unit Name', placeholder: 'Input Unit Name Here',
-      wrapper_html: { class: 'form-group' },
-      input_html: { class: 'form-control' } %>
-    <%= f.input :organization_id, collection: Organization.organization_names.sort, label: 'Operator Name', :hint => "Organization is a required field.  If you have not input the organization you need in the 'Organizations' tab, please go back and do that now.",
-      wrapper_html: { class: 'form-group' },
-      input_html: { class: 'form-control' } %>
-    <%= f.input :unit_type_description, collection: UnitType.unit_type_list.values.sort, label: 'Unit Type',
-      wrapper_html: { class: 'form-group' },
-      input_html: { class: 'form-control' } %>
+
+    <!-- If a name exists for this processing unit, use that as the default name; otherwise, leave entry blank. -->
+    <% if Name.where("nameable_id = ? AND nameable_type = ?", @processing_unit.id, "ProcessingUnit").empty? %>
+      <%= f.input :initial_name, label: 'Processing Unit Name', placeholder: 'Input Unit Name Here',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>
+    <% else %>
+      <%= f.input :initial_name, label: 'Processing Unit Name', placeholder: 'Input Unit Name Here',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control', value: Name.where("nameable_id = ? AND nameable_type = ?", @processing_unit.id, "ProcessingUnit").last.name } %>
+    <% end %>
+    <!-- - -->
+
+    <!-- If an organization name exists for this processing unit, use that as the default name; otherwise, leave entry blank. -->
+    <% if RoleAssignment.where("subject_id = ? AND subject_type = ? AND holder_type = ?", @processing_unit.id, "ProcessingUnit", "Organization").empty? %>
+      <%= f.input :organization_id, collection: Organization.organization_names.sort, label: 'Operator Name', :hint => "Organization is a required field.  If you have not input the organization you need in the 'Organizations' tab, please go back and do that now.",
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>
+    <% else %>
+      <% organization_id_variable = RoleAssignment.where("subject_id = ? AND subject_type = ? AND holder_type = ?", @processing_unit.id, "ProcessingUnit", "Organization").last.holder_id %>
+      <%= f.input :organization_id, collection: Organization.organization_names.sort, selected: Name.where("nameable_id = ? AND nameable_type = ?", organization_id_variable, "Organization").last.name, label: 'Operator Name', :hint => "Organization is a required field.  If you have not input the organization you need in the 'Organizations' tab, please go back and do that now.",
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>
+    <% end %>
+    <!-- - -->
+
+    <!-- If an unit type exists for this processing unit, use that as the default unit type; otherwise, leave entry blank. -->
+    <% if @processing_unit.unit_type_id.nil? %>
+      <%= f.input :unit_type_description, collection: UnitType.unit_type_list.values.sort, label: 'Unit Type',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>    
+    <% else %>
+      <% unit_type_variable = UnitType.find(@processing_unit.unit_type_id) %>
+      <%= f.input :unit_type_description, collection: UnitType.unit_type_list.values.sort, selected: UnitType.find(@processing_unit.unit_type_id).unit_type_string[@processing_unit.unit_type_id], label: 'Unit Type',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>
+    <% end %>
+    <!-- - -->
+
     <div class="panel panel-default">
         <div class="panel-heading">
           <h4>Location</h4>
@@ -58,13 +88,13 @@
             <div class="panel-body">
               <%= f.input :city_variable, label: 'City',
                 wrapper_html: { class: 'form-group' },
-                input_html: { class: 'form-control' } %>
+                input_html: { class: 'form-control', value: @processing_unit.city } %>
               <%= f.input :state_variable, label: 'State',
                 wrapper_html: { class: 'form-group' },
-                input_html: { class: 'form-control' } %>
+                input_html: { class: 'form-control', value: @processing_unit.state } %>
               <%= f.input :country_variable, label: 'Country',
                 wrapper_html: { class: 'form-group' },
-                input_html: { class: 'form-control' } %>
+                input_html: { class: 'form-control', value: @processing_unit.country } %>
             </div>
           </div>
         </div>
