@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  project_id: 1
+  project_category_id: 1
+  value: 1.5
+  units_of_measrure_id: 1
+
+two:
+  user_id: 1
+  project_id: 1
+  project_category_id: 1
+  value: 1.5
+  units_of_measrure_id: 1

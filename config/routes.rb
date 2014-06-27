@@ -1,5 +1,13 @@
 Chains::Application.routes.draw do
 
+  resources :project_categories
+
+  resources :project_detail_numericals
+
+  resources :project_detail_strings
+
+  resources :projects
+
   get "registrations/new"
   get "registrations/create"
 

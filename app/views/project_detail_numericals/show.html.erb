@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @project_detail_numerical.user_id %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @project_detail_numerical.project_id %>
+</p>
+
+<p>
+  <strong>Project category:</strong>
+  <%= @project_detail_numerical.project_category_id %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @project_detail_numerical.value %>
+</p>
+
+<p>
+  <strong>Units of measrure:</strong>
+  <%= @project_detail_numerical.units_of_measrure_id %>
+</p>
+
+<%= link_to 'Edit', edit_project_detail_numerical_path(@project_detail_numerical) %> |
+<%= link_to 'Back', project_detail_numericals_path %>

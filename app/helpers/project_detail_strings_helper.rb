@@ -1,0 +1,2 @@
+module ProjectDetailStringsHelper
+end

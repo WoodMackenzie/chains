@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @project.user_id %>
+</p>
+
+<p>
+  <strong>Projectable type:</strong>
+  <%= @project.projectable_type %>
+</p>
+
+<p>
+  <strong>Projectable:</strong>
+  <%= @project.projectable_id %>
+</p>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

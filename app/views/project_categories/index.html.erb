@@ -1,0 +1,31 @@
+<h1>Listing project_categories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Category type</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_categories.each do |project_category| %>
+      <tr>
+        <td><%= project_category.user_id %></td>
+        <td><%= project_category.category_type %></td>
+        <td><%= project_category.description %></td>
+        <td><%= link_to 'Show', project_category %></td>
+        <td><%= link_to 'Edit', edit_project_category_path(project_category) %></td>
+        <td><%= link_to 'Destroy', project_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project category', new_project_category_path %>

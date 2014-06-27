@@ -9,6 +9,7 @@ class ProcessingUnit < ActiveRecord::Base
   has_many :role_holder_assignments, as: :holder, class_name: "RoleAssignment", dependent: :destroy
   has_many :role_subject_assignments, as: :subject, class_name: "RoleAssignment", dependent: :destroy
   has_many :throughputs, dependent: :destroy
+  has_many :projects, as: :projectable, dependent: :destroy
 
   def name_history
     self.names.order(active_date: :desc).order(updated_at: :desc)

@@ -1,0 +1,15 @@
+<%= simple_form_for(@project) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :projectable_type, label: 'Project Type',
+    wrapper_html: { class: 'form-group' },
+    input_html: { class: 'form-control', value: "ProcessingUnit" } %>
+  <%= f.input :projectable_id, label: "'Project's Source ID" 
+    wrapper_html: { class: 'form-group' },
+    input_html: { class: 'form-control' } %>
+
+  <%= f.button :submit,
+    value: "Create / Update Project",
+    class: 'btn btn-success' %>
+
+<% end %>

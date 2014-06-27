@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620144357) do
+ActiveRecord::Schema.define(version: 20140627151941) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -72,6 +72,41 @@ ActiveRecord::Schema.define(version: 20140620144357) do
     t.string   "country"
     t.integer  "unit_type_id"
     t.integer  "location_granularity_id"
+  end
+
+  create_table "project_categories", force: true do |t|
+    t.integer  "user_id"
+    t.string   "category_type"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_detail_numericals", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "project_category_id"
+    t.float    "value"
+    t.integer  "units_of_measrure_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "project_detail_strings", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "project_category_id"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", force: true do |t|
+    t.integer  "user_id"
+    t.string   "projectable_type"
+    t.integer  "projectable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "role_assignments", force: true do |t|

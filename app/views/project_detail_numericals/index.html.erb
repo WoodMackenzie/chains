@@ -1,0 +1,35 @@
+<h1>Listing project_detail_numericals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Project</th>
+      <th>Project category</th>
+      <th>Value</th>
+      <th>Units of measrure</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_detail_numericals.each do |project_detail_numerical| %>
+      <tr>
+        <td><%= project_detail_numerical.user_id %></td>
+        <td><%= project_detail_numerical.project_id %></td>
+        <td><%= project_detail_numerical.project_category_id %></td>
+        <td><%= project_detail_numerical.value %></td>
+        <td><%= project_detail_numerical.units_of_measrure_id %></td>
+        <td><%= link_to 'Show', project_detail_numerical %></td>
+        <td><%= link_to 'Edit', edit_project_detail_numerical_path(project_detail_numerical) %></td>
+        <td><%= link_to 'Destroy', project_detail_numerical, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project detail numerical', new_project_detail_numerical_path %>
