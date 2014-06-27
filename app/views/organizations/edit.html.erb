@@ -2,7 +2,9 @@
   <div class="panel-heading">
     <h4>Edit Organization</h4>
   </div>
-  <%= render 'form' %>
+  <div class="panel-body">
+    <%= render 'form' %>
+    <br>
+    <%= link_to 'Back', @organization, html_options = {class: 'btn btn-default'}  %>
+  </div>
 </div>
-
-<%= link_to 'Back', @organization, html_options = {class: 'btn btn-default'}  %>

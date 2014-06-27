@@ -2,6 +2,8 @@
   <div class="panel-heading">
     <h4>New Organization</h4>
   </div>
-  <%= render 'form' %>
+  <div class="panel-body">
+    <%= render 'form' %>
+    <%= link_to 'Back', organizations_path, html_options = {class: 'btn btn-default'} %>
+  </div>
 </div>
-<%= link_to 'Back', organizations_path, html_options = {class: 'btn btn-default'} %>

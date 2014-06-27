@@ -1,11 +1,15 @@
-<div class="panel-body">
   <%= simple_form_for(@organization) do |f| %>
     <%= f.error_notification %>
-    <%= f.input :initial_name, 
-      wrapper_html: { class: 'form-group' },
-      input_html: { class: 'form-control' } %>
+    <% if Name.where("nameable_id = ? AND nameable_type = ?", @organization.id, "Organization").empty? %>
+      <%= f.input :initial_name, label: 'Organization Name', placeholder: 'Input Unit Name Here',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>
+    <% else %>
+      <%= f.input :initial_name, label: 'Organization Name',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control', value: Name.where("nameable_id = ? AND nameable_type = ?", @organization.id, "Organization").last.name } %>
+    <% end %>
     <%= f.button :submit,
-      value: "Create New Organization",
+      value: "Create / Update Organization",
       class: 'btn btn-success' %>
   <% end %>
-</div>

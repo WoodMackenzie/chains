@@ -2,6 +2,9 @@
   <div class="panel-heading">
     <h4>New Processing Unit</h4>
   </div>
-  <%= render 'form' %>
+  <div class="panel-body">
+    <%= render 'form' %>
+    <br>
+    <%= link_to 'Back', processing_units_path, html_options = {class: 'btn btn-default'} %>
+  </div>
 </div>
-<%= link_to 'Back', processing_units_path, html_options = {class: 'btn btn-default'} %>
