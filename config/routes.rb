@@ -40,9 +40,9 @@ Chains::Application.routes.draw do
   if Rails.env.production?
     devise_for :users, :controllers => {:registrations => "registrations"}
   else
-    # devise_for :users
+    devise_for :users
     #Below line is for testing purposes, to see if this piece of code omits new user registrations from program.
-    devise_for :users, :controllers => {:registrations => "registrations"}
+    # devise_for :users, :controllers => {:registrations => "registrations"}
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

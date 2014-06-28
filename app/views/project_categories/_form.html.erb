@@ -2,12 +2,16 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :user_id %>
-    <%= f.input :category_type %>
-    <%= f.input :description %>
+    <%= f.input :category_type, collection: ["Numerical", "String"], label: 'Cateory Type',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>
+    <%= f.input :description, label: 'Category Description', placeholder: 'Input Category Description Here',
+        wrapper_html: { class: 'form-group' },
+        input_html: { class: 'form-control' } %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+  <%= f.button :submit,
+    value: "Create / Update Project Category",
+    class: 'btn btn-success' %>
+
 <% end %>

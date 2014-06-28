@@ -1,6 +1,11 @@
-<h1>Editing project</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Edit Project</h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'form' %>
+    <br>
+    <%= link_to 'Show', @project, html_options = {class: 'btn btn-primary active'} %>
+    <%= link_to 'Back', projects_path, html_options = {class: 'btn btn-default'}  %>
+  </div>
+</div>

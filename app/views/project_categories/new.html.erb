@@ -1,5 +1,10 @@
-<h1>New project_category</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', project_categories_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>New Project Category</h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'form' %>
+    <br>
+    <%= link_to 'Back', project_categories_path, html_options = {class: 'btn btn-default'} %>
+  </div>
+</div>

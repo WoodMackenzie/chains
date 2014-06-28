@@ -1,31 +1,34 @@
-<h1>Listing project_categories</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Category type</th>
-      <th>Description</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @project_categories.each do |project_category| %>
-      <tr>
-        <td><%= project_category.user_id %></td>
-        <td><%= project_category.category_type %></td>
-        <td><%= project_category.description %></td>
-        <td><%= link_to 'Show', project_category %></td>
-        <td><%= link_to 'Edit', edit_project_category_path(project_category) %></td>
-        <td><%= link_to 'Destroy', project_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Project category', new_project_category_path %>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Project Category List</h4>
+    </div>
+    <div class="panel-body">
+      <a href="/project_categories/new" class="btn btn-success active" role="button">Create New Project Category</a>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Project Category</th>
+            <th>Category Type</th>
+            <th>Last Updated By</th>
+            <th>Last Updated</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @project_categories.each do |project_category| %>
+            <tr>
+              <td><%= project_category.description %></td>
+              <td><%= project_category.category_type %></td>
+              <td><%= User.find(project_category.user_id).full_name %></td>
+              <td><%= time_ago_in_words(project_category.updated_at) %> ago</td>
+              <td><%= link_to 'Show', 
+                project_category, 
+                html_options = {class: 'btn btn-primary active'} %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>    
+    </div>
+  </div>
+</div>

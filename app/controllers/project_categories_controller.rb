@@ -25,7 +25,7 @@ class ProjectCategoriesController < ApplicationController
   # POST /project_categories.json
   def create
     @project_category = ProjectCategory.new(project_category_params)
-
+    @project_category.user_id = current_user.id
     respond_to do |format|
       if @project_category.save
         format.html { redirect_to @project_category, notice: 'Project category was successfully created.' }
@@ -40,6 +40,7 @@ class ProjectCategoriesController < ApplicationController
   # PATCH/PUT /project_categories/1
   # PATCH/PUT /project_categories/1.json
   def update
+    @project_category.user_id = current_user.id
     respond_to do |format|
       if @project_category.update(project_category_params)
         format.html { redirect_to @project_category, notice: 'Project category was successfully updated.' }

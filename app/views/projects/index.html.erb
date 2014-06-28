@@ -1,31 +1,36 @@
-<h1>Listing projects</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Projectable type</th>
-      <th>Projectable</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.user_id %></td>
-        <td><%= project.projectable_type %></td>
-        <td><%= project.projectable_id %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Project', new_project_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Projects</h4>
+  </div>
+  <div class="panel-body">
+    <a href="/projects/new" class="btn btn-success active" role="button">Create New Project</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Source of Project</th>
+          <th>Type of Project</th>
+          <th>Last Updated By</th>
+          <th>Last Updated</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @projects.each do |project| %>
+          <tr>
+            <td>
+              <% if project.projectable_type = "ProcessingUnit" %>
+                <%= ProcessingUnit.find(project.projectable_id).latest_historical_name(Time.now) %>
+              <% end %>
+            </td>
+            <td><%= project.projectable_type %></td>
+            <td><%= User.find(project.user_id).full_name %></td>
+            <td><%= time_ago_in_words(project.updated_at) + " ago" %></td>
+            <td><%= link_to 'Show', 
+              project, 
+              html_options = {class: 'btn btn-primary active'} %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>
