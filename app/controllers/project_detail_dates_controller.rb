@@ -14,7 +14,7 @@ class ProjectDetailDatesController < ApplicationController
 
   # GET /project_detail_dates/new
   def new
-    @project_detail_date = ProjectDetailDate.new
+    @project_detail_date = ProjectDetailDate.new(:project_id => params[:project_id], :project_category_id => params[:project_category_id])
   end
 
   # GET /project_detail_dates/1/edit
@@ -71,4 +71,5 @@ class ProjectDetailDatesController < ApplicationController
     def project_detail_date_params
       params.require(:project_detail_date).permit(:user_id, :project_id, :project_category_id, :value)
     end
+
 end

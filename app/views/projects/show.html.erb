@@ -1,19 +1,108 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>User:</strong>
-  <%= @project.user_id %>
-</p>
-
-<p>
-  <strong>Projectable type:</strong>
-  <%= @project.projectable_type %>
-</p>
-
-<p>
-  <strong>Projectable:</strong>
-  <%= @project.projectable_id %>
-</p>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <% if @project.projectable_type = "ProcessingUnit" %>
+        <h4>Project - <%= ProcessingUnit.find(@project.projectable_id).latest_historical_name(Time.now) %></h4>
+      <% else %>
+        <h4>Project</h4>
+      <% end %>
+    </div>
+    <div class="panel-body">
+      <div class="form">
+        <div class="form-group">
+          <label>Source of Project:</label>
+          <p class="form-control-static">
+            <%= ProcessingUnit.find(@project.projectable_id).latest_historical_name(Time.now) %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Project Type:</label>
+          <p class="form-control-static">
+            <%= ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", "Project Type").first.id).last.value %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Project Status:</label>
+          <p class="form-control-static">
+            <%= ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", "Project Status").first.id).last.value %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Investment Probability:</label>
+          <p class="form-control-static">
+            <%= ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", "Investment Probability").first.id).last.value %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated By:</label>
+          <p class="form-control-static">
+            <%= User.find(@project.user_id).full_name %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated:</label>
+          <p class="form-control-static">
+            <%= time_ago_in_words(@project.updated_at) + " ago" %>
+          </p>
+        </div>
+      </div>
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <%= button_to 'Edit', edit_project_path(@project),
+            class: 'btn btn-warning active',
+            method: :get %>
+        </div> 
+        <div class="btn-group">
+          <%= button_to 'Back', projects_path,
+            class: 'btn btn-primary active',
+            method: :get %>
+        </div>
+        <div class="btn-group">    
+          <%= button_to 'Destroy', @project,
+            method: :delete,
+            class: 'btn btn-danger active',
+            data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Additional Project Details</h4>
+    </div>
+    <div class="panel-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Project Category</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% ProjectCategory.root_categories.each do |this_category| %>
+            <% if ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).empty? and ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).empty? and ProjectDetailDate.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).empty? %>
+              <tr>
+                <td><%= this_category.description %></td>
+                <% if this_category.category_type == "String" %>
+                  <td><%= link_to 'Create New Project Detail', 
+                    new_project_detail_string_path(:project_id => @project.id, :project_category_id => this_category.id), 
+                    html_options = {class: 'btn btn-success active'} %></td>
+                <% elsif this_category.category_type == "Numerical" %>
+                  <td><%= link_to 'Create New Project Detail', 
+                    new_project_detail_numerical_path(:project_id => @project.id, :project_category_id => this_category.id), 
+                    html_options = {class: 'btn btn-success active'} %></td>
+                <% elsif this_category.category_type == "Date" %>
+                  <td><%= link_to 'Create New Project Detail', 
+                    new_project_detail_date_path(:project_id => @project.id, :project_category_id => this_category.id), 
+                    html_options = {class: 'btn btn-success active'} %></td>
+                <% else %>
+                <% end %>
+              </tr>
+            <% else %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -14,7 +14,7 @@ class ProjectDetailStringsController < ApplicationController
 
   # GET /project_detail_strings/new
   def new
-    @project_detail_string = ProjectDetailString.new
+    @project_detail_string = ProjectDetailString.new(:project_id => params[:project_id], :project_category_id => params[:project_category_id])
   end
 
   # GET /project_detail_strings/1/edit

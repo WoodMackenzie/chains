@@ -10,6 +10,16 @@ class ProjectCategory < ActiveRecord::Base
     return array
   end
 
+  def self.root_categories
+    array = Array.new
+    ProjectCategory.all.each do |category|
+      if category.parent_id.nil?
+        array.push(category)
+      end
+    end
+    return array
+  end
+
   def self.root_category_descriptions
     array = Array.new
     ProjectCategory.all.each do |category|
@@ -22,6 +32,14 @@ class ProjectCategory < ActiveRecord::Base
 
   def children_list
     ProjectCategory.where('parent_id = ?', self.id)
+  end
+
+  def children_list_string
+    hash = Hash.new
+    self.children_list.all.each do |category|
+      hash[category.id] = category.description
+    end
+    return hash
   end
 
   def has_no_children

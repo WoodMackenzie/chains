@@ -1,15 +1,60 @@
 <%= simple_form_for(@project) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :projectable_type, label: 'Project Type',
+  <%= f.input :projectable_type, label: false,
     wrapper_html: { class: 'form-group' },
-    input_html: { class: 'form-control', value: "ProcessingUnit" } %>
-  <%= f.input :projectable_id, label: "Project's Source ID", 
+    input_html: { class: 'form-control', type: 'hidden' } %>
+  <%= f.input :projectable_id, label: false,
     wrapper_html: { class: 'form-group' },
-    input_html: { class: 'form-control' } %>
-  <%= f.input :investment_probability_variable, label: "Investment Probability", 
-    wrapper_html: { class: 'form-group' },
-    input_html: { class: 'form-control' } %>
+    input_html: { class: 'form-control', type: 'hidden' } %>
+
+<!--Project Type section:
+      If there is nothing filled out in the project categories for 'project type', leave the section blank for user to fill in; if there is nothing under this project for project types, then return the list of sub-categories under 'project type' as a collection; if there is an existing sub-category of 'project type' already entered for this project, return that. -->
+  <% if ProjectCategory.where("description = ?", "Project Type").empty? %>
+    <%= f.input :project_type_variable, label: "Project Type", 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+  <% elsif ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", "Project Type").first.id).empty? %>
+    <%= f.input :project_type_variable, label: "Project Type", collection: ProjectCategory.where("description = ?", "Project Type").first.children_list_string.values, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+  <% else %>
+    <%= f.input :project_type_variable, label: "Project Type", collection: ProjectCategory.where("description = ?", "Project Type").first.children_list_string.values, selected: ProjectCategory.find(ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", "Project Type").first.id).last.id).description,
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+  <% end %>
+
+<!--Project Status section:
+      If there is nothing filled out in the project categories for 'project status', leave the section blank for user to fill in; if there is nothing under this project for project types, then return the list of sub-categories under 'project status' as a collection; if there is an existing sub-category of 'project status' already entered for this project, return that. -->
+  <% if ProjectCategory.where("description = ?", "Project Status").empty? %>
+    <%= f.input :project_status_variable, label: "Project Status", 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+  <% elsif ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", "Project Status").first.id).empty? %>
+    <%= f.input :project_status_variable, label: "Project Status", collection: ProjectCategory.where("description = ?", "Project Status").first.children_list_string.values, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+  <% else %>
+    <%= f.input :project_type_variable, label: "Project Status", collection: ProjectCategory.where("description = ?", "Project Status").first.children_list_string.values, selected: ProjectCategory.find(ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", "Project Status").first.id).last.id).description,
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+  <% end %>
+
+<!--Investment Probability section:
+      If there is nothing filled out in the project categories for 'Investment Probability', leave the section blank for user to fill in; if there is nothing under this project for project types, then return the list of sub-categories under 'Investment Probability' as a collection; if there is an existing sub-category of 'Investment Probability' already entered for this project, return that. -->
+  <% if ProjectCategory.where("description = ?", "Investment Probability").empty? %>
+    <%= f.input :investment_probability_variable, label: "Investment Probability",
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+  <% elsif ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", "Project Status").first.id).empty? %>
+    <%= f.input :investment_probability_variable, label: "Investment Probability", collection: ProjectCategory.where("description = ?", "Investment Probability").first.children_list_string.values, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+  <% else %>
+    <%= f.input :investment_probability_variable, label: "Investment Probability", collection: ProjectCategory.where("description = ?", "Investment Probability").first.children_list_string.values, selected: ProjectCategory.find(ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", "Investment Probability").first.id).last.id).description,
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+  <% end %>
 
   <%= f.button :submit,
     value: "Create / Update Project",

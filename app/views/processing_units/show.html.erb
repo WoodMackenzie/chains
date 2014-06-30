@@ -111,18 +111,32 @@
   <div class="panel-body">
     <div class="btn-toolbar">
       <div class="btn-group">
-        <%= link_to 'Create New Project', new_project_path,
+        <%= link_to 'Create New Project', new_project_path(:projectable_type => "ProcessingUnit", :projectable_id => @processing_unit.id),
           class: 'btn btn-success active' %>
       </div> 
     </div>
     <table class="table table-hover">
       <thead>
         <tr>
+          <th>Project Type</th>
+          <th>Project Status</th>
+          <th>Investment Probability</th>
+          <th>User</th>
+          <th>Last Updated</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <% @processing_unit.projects.each do |project| %>
           <tr>
+            <td><%= ProjectDetailString.where("project_id = ? AND project_category_id = ?", project.id, ProjectCategory.where("description = ?", "Project Type").first.id).last.value %></td>
+            <td><%= ProjectDetailString.where("project_id = ? AND project_category_id = ?", project.id, ProjectCategory.where("description = ?", "Project Status").first.id).last.value %></td>
+            <td><%= ProjectDetailString.where("project_id = ? AND project_category_id = ?", project.id, ProjectCategory.where("description = ?", "Investment Probability").first.id).last.value %></td>
+            <td><%= User.find(project.user_id).full_name %></td>
+            <td><%= time_ago_in_words(project.updated_at) %></td>
+            <td><%= link_to 'Show', 
+              project, 
+              html_options = {class: 'btn btn-primary active'} %></td>
           </tr>
         <% end %>
       </tbody>

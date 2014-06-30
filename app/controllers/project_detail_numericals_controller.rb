@@ -14,7 +14,7 @@ class ProjectDetailNumericalsController < ApplicationController
 
   # GET /project_detail_numericals/new
   def new
-    @project_detail_numerical = ProjectDetailNumerical.new
+    @project_detail_numerical = ProjectDetailNumerical.new(:project_id => params[:project_id], :project_category_id => params[:project_category_id])
   end
 
   # GET /project_detail_numericals/1/edit
