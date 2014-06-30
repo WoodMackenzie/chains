@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627151941) do
+ActiveRecord::Schema.define(version: 20140630123348) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -80,6 +80,16 @@ ActiveRecord::Schema.define(version: 20140627151941) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
+  end
+
+  create_table "project_detail_dates", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "project_category_id"
+    t.date     "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "project_detail_numericals", force: true do |t|
@@ -87,7 +97,7 @@ ActiveRecord::Schema.define(version: 20140627151941) do
     t.integer  "project_id"
     t.integer  "project_category_id"
     t.float    "value"
-    t.integer  "units_of_measrure_id"
+    t.integer  "units_of_measure_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

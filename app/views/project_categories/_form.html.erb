@@ -2,9 +2,20 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :category_type, collection: ["Numerical", "String"], label: 'Cateory Type',
-        wrapper_html: { class: 'form-group' },
-        input_html: { class: 'form-control' } %>
+    <%= f.hidden_field :parent_id %>
+
+  <!-- If you are putting in a sub-category (i.e. something that has a parent_id), the category type of this entry should be a string -->
+  <% if @project_category.parent_id.nil? %>
+    <%= f.input :category_type, collection: ["Numerical", "String", "Date"], label: 'Category Type',
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>    
+  <% else %>
+    <%= f.input :category_type, collection: ["Numerical", "String", "Date"], selected: ["String"], label: 'Category Type',
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+  <% end %>
+  <!-- - -->
+
     <%= f.input :description, label: 'Category Description', placeholder: 'Input Category Description Here',
         wrapper_html: { class: 'form-group' },
         input_html: { class: 'form-control' } %>

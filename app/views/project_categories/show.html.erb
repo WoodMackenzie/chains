@@ -12,6 +12,22 @@
           </p>
         </div>
         <div class="form-group">
+          <label>Category Type:</label>
+          <p class="form-control-static">
+            <%= @project_category.category_type %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Parent:</label>
+          <p class="form-control-static">
+            <% if @project_category.parent_id.nil? %>
+              Not Available
+            <% else %>
+              <%= ProjectCategory.find(@project_category.parent_id).description %>
+            <% end %>
+          </p>
+        </div>
+        <div class="form-group">
           <label>Last Updated By:</label>
           <p class="form-control-static">
             <%= User.find(@project_category.user_id).full_name %>
@@ -41,7 +57,65 @@
             class: 'btn btn-danger active',
             data: { confirm: 'Are you sure?' } %>
         </div>
+        <% if @project_category.category_type == "String" %>
+          <div class="btn-group">
+            <%= link_to 'Create New Sub-Category', 
+              new_project_category_path(:parent_id => @project_category),
+              html_options = {class: 'btn btn-success active'} %>
+          </div>
+        <% else %>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+<% if @project_category.category_type == "String" %>
+  <div class = "container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>
+          Sub-Categories of <%= @project_category.description %>
+        </h4>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Parent</th>
+              <th>Last Updated By</th>
+              <th>Last Updated</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% ProjectCategory.all.each do |project_category_variable| %>
+              <% if project_category_variable.parent_id == @project_category.id %>
+                <tr>
+                  <td><%= project_category_variable.description %></td>
+                  <td><%= ProjectCategory.find(project_category_variable.parent_id).description %></td>
+                  <td><%= User.find(project_category_variable.user_id).full_name %></td>
+                  <td><%= time_ago_in_words(project_category_variable.created_at) %> ago</td>
+                  <td><%= link_to 'Show', project_category_variable, html_options = {class: 'btn btn-primary active'} %></td>
+                  <td><%= link_to 'Edit', edit_project_category_path(project_category_variable), html_options = {class: 'btn btn-warning active'} %></td>
+                  <td>
+                    <%= button_to 'Destroy', project_category_variable,
+                    method: :delete,
+                    class: 'btn btn-danger active',
+                    data: { confirm: 'Are you sure?  This will also delete any names, comments, and role assignments that go along with this unit type.' } %>
+                  </td>
+                  <td>
+                    <%= link_to 'Create New Sub-Category', 
+                      new_project_category_path(:parent_id => project_category_variable),
+                      html_options = {class: 'btn btn-success active'} %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>    
+      </div>
+    </div>
+  </div>
+<% else %>
+<% end %>

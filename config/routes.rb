@@ -1,5 +1,7 @@
 Chains::Application.routes.draw do
 
+  resources :project_detail_dates
+
   resources :project_categories
 
   resources :project_detail_numericals

@@ -14,7 +14,7 @@ class ProjectCategoriesController < ApplicationController
 
   # GET /project_categories/new
   def new
-    @project_category = ProjectCategory.new
+    @project_category = ProjectCategory.new(:parent_id => params[:parent_id])
   end
 
   # GET /project_categories/1/edit
@@ -70,6 +70,6 @@ class ProjectCategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_category_params
-      params.require(:project_category).permit(:user_id, :category_type, :description)
+      params.require(:project_category).permit(:user_id, :category_type, :description, :parent_id)
     end
 end

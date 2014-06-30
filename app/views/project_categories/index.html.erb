@@ -16,14 +16,14 @@
           </tr>
         </thead>
         <tbody>
-          <% @project_categories.each do |project_category| %>
+          <% @project_categories.root_category_ids.each do |project_category_id| %>
             <tr>
-              <td><%= project_category.description %></td>
-              <td><%= project_category.category_type %></td>
-              <td><%= User.find(project_category.user_id).full_name %></td>
-              <td><%= time_ago_in_words(project_category.updated_at) %> ago</td>
+              <td><%= ProjectCategory.find(project_category_id).description %></td>
+              <td><%= ProjectCategory.find(project_category_id).category_type %></td>
+              <td><%= User.find(ProjectCategory.find(project_category_id).user_id).full_name %></td>
+              <td><%= time_ago_in_words(ProjectCategory.find(project_category_id).updated_at) %> ago</td>
               <td><%= link_to 'Show', 
-                project_category, 
+                ProjectCategory.find(project_category_id), 
                 html_options = {class: 'btn btn-primary active'} %></td>
             </tr>
           <% end %>

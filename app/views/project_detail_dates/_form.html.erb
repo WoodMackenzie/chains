@@ -1,4 +1,4 @@
-<%= simple_form_for(@project_detail_numerical) do |f| %>
+<%= simple_form_for(@project_detail_date) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -6,7 +6,6 @@
     <%= f.input :project_id %>
     <%= f.input :project_category_id %>
     <%= f.input :value %>
-    <%= f.input :units_of_measure_id %>
   </div>
 
   <div class="form-actions">

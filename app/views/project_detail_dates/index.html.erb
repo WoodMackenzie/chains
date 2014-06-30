@@ -1,0 +1,33 @@
+<h1>Listing project_detail_dates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Project</th>
+      <th>Project category</th>
+      <th>Value</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_detail_dates.each do |project_detail_date| %>
+      <tr>
+        <td><%= project_detail_date.user_id %></td>
+        <td><%= project_detail_date.project_id %></td>
+        <td><%= project_detail_date.project_category_id %></td>
+        <td><%= project_detail_date.value %></td>
+        <td><%= link_to 'Show', project_detail_date %></td>
+        <td><%= link_to 'Edit', edit_project_detail_date_path(project_detail_date) %></td>
+        <td><%= link_to 'Destroy', project_detail_date, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project detail date', new_project_detail_date_path %>
