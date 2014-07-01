@@ -33,6 +33,31 @@
             <%= ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", "Investment Probability").first.id).last.value %>
           </p>
         </div>
+        <% ProjectCategory.root_categories.each do |this_category| %>
+          <% if ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).any? and this_category.description != "Project Type" and this_category.description != "Project Status" and this_category.description != "Investment Probability" %>
+            <div class="form-group">
+              <label><%= this_category.description + ":" %></label>
+              <p class="form-control-static">
+                <%= ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.value %>
+              </p>
+            </div>
+          <% elsif ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).any? %>
+            <div class="form-group">
+              <label><%= this_category.description + ":" %></label>
+              <p class="form-control-static">
+                <%= ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.value.to_s + " " + UnitsOfMeasure.find(ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.units_of_measure_id).description %>
+              </p>
+            </div>
+          <% elsif ProjectDetailDate.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).any? %>
+            <div class="form-group">
+              <label><%= this_category.description + ":" %></label>
+              <p class="form-control-static">
+                <%= ProjectDetailDate.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.value.strftime("%m/%d/%Y") %>
+              </p>
+            </div>
+          <% else %>
+          <% end %>
+        <% end %>
         <div class="form-group">
           <label>Last Updated By:</label>
           <p class="form-control-static">

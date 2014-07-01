@@ -1,14 +1,30 @@
 <%= simple_form_for(@project_detail_date) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :user_id %>
-    <%= f.input :project_id %>
-    <%= f.input :project_category_id %>
-    <%= f.input :value %>
+  <%= f.input :project_id, label: false, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control', type: 'hidden' } %>
+  <%= f.input :project_category_id, label: false, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control', type: 'hidden' } %>
+  <div class="form-group">
+    <label>Source of Project:</label>
+    <p class="form-control-static">
+      <%= ProcessingUnit.find(Project.find(@project_detail_date.project_id).projectable_id).latest_historical_name(Time.now) %>
+    </p>
   </div>
+  <div class="form-group">
+    <label>New Project Detail:</label>
+    <p class="form-control-static">
+      <%= ProjectCategory.find(@project_detail_date.project_category_id).description %>
+    </p>
+  </div>
+  <%= f.input :value, label: "Value", 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+  <%= f.button :submit,
+    value: "Create / Update Project Detail",
+    class: 'btn btn-success' %>
+
 <% end %>

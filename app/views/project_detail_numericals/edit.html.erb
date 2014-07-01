@@ -1,6 +1,11 @@
-<h1>Editing project_detail_numerical</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @project_detail_numerical %> |
-<%= link_to 'Back', project_detail_numericals_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Edit Numerical Project Detail</h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'form' %>
+    <br>
+    <%= link_to 'Show', @project_detail_numerical, html_options = {class: 'btn btn-primary active'} %>
+    <%= link_to 'Back', project_detail_numericals_path, html_options = {class: 'btn btn-default'}  %>
+  </div>
+</div>

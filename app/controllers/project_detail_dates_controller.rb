@@ -25,6 +25,7 @@ class ProjectDetailDatesController < ApplicationController
   # POST /project_detail_dates.json
   def create
     @project_detail_date = ProjectDetailDate.new(project_detail_date_params)
+    @project_detail_date.user_id = current_user.id
 
     respond_to do |format|
       if @project_detail_date.save
@@ -40,6 +41,7 @@ class ProjectDetailDatesController < ApplicationController
   # PATCH/PUT /project_detail_dates/1
   # PATCH/PUT /project_detail_dates/1.json
   def update
+    @project_detail_date.user_id = current_user.id
     respond_to do |format|
       if @project_detail_date.update(project_detail_date_params)
         format.html { redirect_to @project_detail_date, notice: 'Project detail date was successfully updated.' }

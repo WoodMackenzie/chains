@@ -25,6 +25,7 @@ class ProjectDetailStringsController < ApplicationController
   # POST /project_detail_strings.json
   def create
     @project_detail_string = ProjectDetailString.new(project_detail_string_params)
+    @project_detail_string.user_id = current_user.id
 
     respond_to do |format|
       if @project_detail_string.save
@@ -40,6 +41,7 @@ class ProjectDetailStringsController < ApplicationController
   # PATCH/PUT /project_detail_strings/1
   # PATCH/PUT /project_detail_strings/1.json
   def update
+    @project_detail_string.user_id = current_user.id
     respond_to do |format|
       if @project_detail_string.update(project_detail_string_params)
         format.html { redirect_to @project_detail_string, notice: 'Project detail string was successfully updated.' }

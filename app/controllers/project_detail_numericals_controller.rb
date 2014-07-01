@@ -25,7 +25,8 @@ class ProjectDetailNumericalsController < ApplicationController
   # POST /project_detail_numericals.json
   def create
     @project_detail_numerical = ProjectDetailNumerical.new(project_detail_numerical_params)
-
+    @project_detail_numerical.user_id = current_user.id
+    @project_detail_numerical.units_of_measure_id = UnitsOfMeasure.where("description = ?", detail_params[:units_of_measure_description]).first.id
     respond_to do |format|
       if @project_detail_numerical.save
         format.html { redirect_to @project_detail_numerical, notice: 'Project detail numerical was successfully created.' }
@@ -40,6 +41,8 @@ class ProjectDetailNumericalsController < ApplicationController
   # PATCH/PUT /project_detail_numericals/1
   # PATCH/PUT /project_detail_numericals/1.json
   def update
+    @project_detail_numerical.user_id = current_user.id
+    @project_detail_numerical.units_of_measure_id = UnitsOfMeasure.where("description = ?", detail_params[:units_of_measure_description]).first.id
     respond_to do |format|
       if @project_detail_numerical.update(project_detail_numerical_params)
         format.html { redirect_to @project_detail_numerical, notice: 'Project detail numerical was successfully updated.' }
@@ -69,6 +72,10 @@ class ProjectDetailNumericalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_detail_numerical_params
-      params.require(:project_detail_numerical).permit(:user_id, :project_id, :project_category_id, :value, :units_of_measrure_id)
+      params.require(:project_detail_numerical).permit(:user_id, :project_id, :project_category_id, :value, :units_of_measure_id)
+    end
+
+    def detail_params
+      params.require(:project_detail_numerical).permit(:units_of_measure_description)
     end
 end

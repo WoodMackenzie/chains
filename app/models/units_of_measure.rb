@@ -30,4 +30,14 @@ class UnitsOfMeasure < ActiveRecord::Base
     return array
   end
   
+  def self.currency_unit_list
+    array = Array.new
+    time_measure_type_id = MeasureType.where("description LIKE ?","Currency").first.id
+    time_results = UnitsOfMeasure.where("measure_type_id=?",time_measure_type_id)
+    time_results.all.each do |time_result|
+      array.push(time_result.description)
+    end
+    return array
+  end
+
 end

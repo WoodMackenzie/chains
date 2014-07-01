@@ -1,6 +1,11 @@
-<h1>Editing project_detail_string</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @project_detail_string %> |
-<%= link_to 'Back', project_detail_strings_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Edit String Project Detail</h4>
+  </div>
+  <div class="panel-body">
+    <%= render 'form' %>
+    <br>
+    <%= link_to 'Show', @project_detail_string, html_options = {class: 'btn btn-primary active'} %>
+    <%= link_to 'Back', project_detail_strings_path, html_options = {class: 'btn btn-default'}  %>
+  </div>
+</div>
