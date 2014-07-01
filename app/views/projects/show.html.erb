@@ -33,31 +33,6 @@
             <%= ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", "Investment Probability").first.id).last.value %>
           </p>
         </div>
-        <% ProjectCategory.root_categories.each do |this_category| %>
-          <% if ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).any? and this_category.description != "Project Type" and this_category.description != "Project Status" and this_category.description != "Investment Probability" %>
-            <div class="form-group">
-              <label><%= this_category.description + ":" %></label>
-              <p class="form-control-static">
-                <%= ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.value %>
-              </p>
-            </div>
-          <% elsif ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).any? %>
-            <div class="form-group">
-              <label><%= this_category.description + ":" %></label>
-              <p class="form-control-static">
-                <%= ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.value.to_s + " " + UnitsOfMeasure.find(ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.units_of_measure_id).description %>
-              </p>
-            </div>
-          <% elsif ProjectDetailDate.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).any? %>
-            <div class="form-group">
-              <label><%= this_category.description + ":" %></label>
-              <p class="form-control-static">
-                <%= ProjectDetailDate.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.value.strftime("%m/%d/%Y") %>
-              </p>
-            </div>
-          <% else %>
-          <% end %>
-        <% end %>
         <div class="form-group">
           <label>Last Updated By:</label>
           <p class="form-control-static">
@@ -78,10 +53,17 @@
             method: :get %>
         </div> 
         <div class="btn-group">
-          <%= button_to 'Back', projects_path,
+          <%= button_to 'Back to Project Index', projects_path,
             class: 'btn btn-primary active',
             method: :get %>
         </div>
+        <% if %>
+          <div class="btn-group">
+            <%= link_to 'Back to Processing Unit', processing_unit_path(@project.projectable_id), 
+            html_options = {class: 'btn btn-primary active'} %>
+          </div>
+        <% else %>
+        <% end %>
         <div class="btn-group">    
           <%= button_to 'Destroy', @project,
             method: :delete,
@@ -89,11 +71,95 @@
             data: { confirm: 'Are you sure?' } %>
         </div>
       </div>
+      <br>
+      <ol class="breadcrumb"><h4>Additional Project Details</h4></ol>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Project Detail</th>
+            <th>Value</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% ProjectCategory.root_categories.each do |this_category| %>
+            <% if ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).any? and this_category.description != "Project Type" and this_category.description != "Project Status" and this_category.description != "Investment Probability" %>
+              <tr>
+                <td><%= this_category.description + ":" %></td>
+                <td>
+                  <%= ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.value %>
+                </td>
+                <td>
+                  <div class="btn-group">
+                    <%= button_to 'Edit Project Detail', edit_project_detail_string_path(ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last),
+                      class: 'btn btn-warning active',
+                      method: :get %>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group">    
+                    <%= button_to 'Destroy', ProjectDetailString.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last,
+                      method: :delete,
+                      class: 'btn btn-danger active',
+                      data: { confirm: 'Are you sure?' } %>
+                  </div>
+                </td>
+              </tr>
+            <% elsif ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).any? %>
+              <tr>
+                <td><%= this_category.description + ":" %></td>
+                <td>
+                  <%= ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.value.to_s + " " + UnitsOfMeasure.find(ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.units_of_measure_id).description %>
+                </td>
+                <td>
+                  <div class="btn-group">
+                    <%= button_to 'Edit Project Detail', edit_project_detail_numerical_path(ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last),
+                      class: 'btn btn-warning active',
+                      method: :get %>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group">    
+                    <%= button_to 'Destroy', ProjectDetailNumerical.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last,
+                      method: :delete,
+                      class: 'btn btn-danger active',
+                      data: { confirm: 'Are you sure?' } %>
+                  </div>
+                </td>
+              </tr>
+            <% elsif ProjectDetailDate.where("project_id = ? AND project_category_id = ?", @project.id, ProjectCategory.where("description = ?", this_category.description).first.id).any? %>
+              <tr>
+                <td><%= this_category.description + ":" %></td>
+                <td>
+                  <%= ProjectDetailDate.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last.value.strftime("%b %d, %Y") %>
+                </td>
+                <td>
+                  <div class="btn-group">
+                    <%= button_to 'Edit Project Detail', edit_project_detail_date_path(ProjectDetailDate.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last),
+                      class: 'btn btn-warning active',
+                      method: :get %>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group">    
+                    <%= button_to 'Destroy', ProjectDetailDate.where("project_id = ? AND project_category_id = ?", @project.id, this_category.id).last,
+                      method: :delete,
+                      class: 'btn btn-danger active',
+                      data: { confirm: 'Are you sure?' } %>
+                  </div>
+                </td>
+              </tr>
+            <% else %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4>Additional Project Details</h4>
+      <h4>Unspecified Project Details</h4>
     </div>
     <div class="panel-body">
       <table class="table table-hover">

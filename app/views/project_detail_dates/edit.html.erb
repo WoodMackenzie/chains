@@ -5,7 +5,7 @@
   <div class="panel-body">
     <%= render 'form' %>
     <br>
-    <%= link_to 'Show', @project_detail_date, html_options = {class: 'btn btn-primary active'} %>
-    <%= link_to 'Back', project_detail_dates_path, html_options = {class: 'btn btn-default'}  %>
+    <!-- Linking the 'Back' button to go back to the project this detail eminates from -->
+    <%= link_to 'Back to Project', project_path(@project_detail_date.project_id), html_options = {class: 'btn btn-default'}  %>
   </div>
 </div>

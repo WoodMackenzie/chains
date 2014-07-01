@@ -5,6 +5,7 @@
   <div class="panel-body">
     <%= render 'form' %>
     <br>
-    <%= link_to 'Back', project_detail_numericals_path, html_options = {class: 'btn btn-default'} %>
+    <!-- Linking the 'Back' button to go back to the project this detail eminates from -->
+    <%= link_to 'Back to Project', project_path(@project_detail_numerical.project_id), html_options = {class: 'btn btn-default'} %>
   </div>
 </div>
