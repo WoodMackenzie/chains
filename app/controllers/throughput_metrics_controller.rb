@@ -4,7 +4,7 @@ class ThroughputMetricsController < ApplicationController
   # GET /throughput_metrics
   # GET /throughput_metrics.json
   def index
-    @throughput_metrics = ThroughputMetric.all
+    @throughput_metrics = ThroughputMetric.all.order("description")
   end
 
   # GET /throughput_metrics/1

@@ -4,7 +4,7 @@ class MeasureTypesController < ApplicationController
   # GET /measure_types
   # GET /measure_types.json
   def index
-    @measure_types = MeasureType.all
+    @measure_types = MeasureType.all.order("description")
   end
 
   # GET /measure_types/1

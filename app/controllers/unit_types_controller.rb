@@ -4,7 +4,7 @@ class UnitTypesController < ApplicationController
   # GET /unit_types
   # GET /unit_types.json
   def index
-    @unit_types = UnitType.all
+    @unit_types = UnitType.all.order("description")
   end
 
   # GET /unit_types/1

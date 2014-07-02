@@ -4,7 +4,7 @@ class ProjectCategoriesController < ApplicationController
   # GET /project_categories
   # GET /project_categories.json
   def index
-    @project_categories = ProjectCategory.all
+    @project_categories = ProjectCategory.all.order("category_type").order("description")
   end
 
   # GET /project_categories/1

@@ -4,7 +4,7 @@ class UnitsOfMeasuresController < ApplicationController
   # GET /units_of_measures
   # GET /units_of_measures.json
   def index
-    @units_of_measures = UnitsOfMeasure.all
+    @units_of_measures = UnitsOfMeasure.all.order("description")
   end
 
   # GET /units_of_measures/1

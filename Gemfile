@@ -20,12 +20,19 @@ end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
+# Kaminari gem to help with pagination
+gem 'kaminari'
+
+# Devise gem to help with log-in credentials and user profiles
 gem 'devise'
 
+# Simple_form gem to help with styling
 gem 'simple_form'
 
+# Geocoder gem to help with geocoding processing units during the creation step
 gem 'geocoder'
 
+# Country_select gem to help give an available drop-down list of countries to select from
 gem 'country_select'
 
 # Use Uglifier as compressor for JavaScript assets

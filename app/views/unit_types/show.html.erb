@@ -81,7 +81,7 @@
           </tr>
         </thead>
         <tbody>
-          <% UnitType.all.each do |unit_type_variable| %>
+          <% UnitType.all.order("description").each do |unit_type_variable| %>
             <% if unit_type_variable.parent_id == @unit_type.id %>
               <tr>
                 <td><%= unit_type_variable.description %></td>

@@ -4,7 +4,7 @@ class LocationGranularitiesController < ApplicationController
   # GET /location_granularities
   # GET /location_granularities.json
   def index
-    @location_granularities = LocationGranularity.all
+    @location_granularities = LocationGranularity.all.order("description")
   end
 
   # GET /location_granularities/1

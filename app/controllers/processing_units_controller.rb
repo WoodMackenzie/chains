@@ -4,7 +4,7 @@ class ProcessingUnitsController < ApplicationController
   # GET /processing_units
   # GET /processing_units.json
   def index
-    @processing_units = ProcessingUnit.search(params[:search])
+    @processing_units = ProcessingUnit.search(params[:search]).page(params[:page])
     # @processing_units = ProcessingUnit.all
   end
 
