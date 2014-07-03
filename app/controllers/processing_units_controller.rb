@@ -4,8 +4,15 @@ class ProcessingUnitsController < ApplicationController
   # GET /processing_units
   # GET /processing_units.json
   def index
-    @processing_units = ProcessingUnit.search(params[:search]).page(params[:page])
-    # @processing_units = ProcessingUnit.all
+    # In this particular case, the search function returns an array object, but Kaminari requires 
+    # an ActiveRecord::Relation object to function.  This checks to see if the search went through 
+    # and applies the pagination in either instance.
+    @processing_units = ProcessingUnit.search(params[:search])
+    if @processing_units.class == Array
+      @processing_units = Kaminari.paginate_array(@processing_units).page(params[:page])
+    else
+      @processing_units = @processing_units.page(params[:page])
+    end
   end
 
   # GET /processing_units/1
