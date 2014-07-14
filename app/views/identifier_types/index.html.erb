@@ -1,29 +1,33 @@
-<h1>Listing identifier_types</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Value</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @identifier_types.each do |identifier_type| %>
-      <tr>
-        <td><%= identifier_type.user_id %></td>
-        <td><%= identifier_type.value %></td>
-        <td><%= link_to 'Show', identifier_type %></td>
-        <td><%= link_to 'Edit', edit_identifier_type_path(identifier_type) %></td>
-        <td><%= link_to 'Destroy', identifier_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Identifier type', new_identifier_type_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Identifier Types</h4>
+  </div>
+  <div class="panel-body">
+    <a href="/identifier_types/new" class="btn btn-success active" role="button">Create New Identifier Type</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Identifier Type</th>
+          <th>Last Updated By</th>
+          <th>Last Updated</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @identifier_types.each do |this_identifier_type| %>
+          <tr>
+            <td><%= this_identifier_type.value %></td>
+            <td><%= User.find(this_identifier_type.user_id).full_name %></td>
+            <td><%= time_ago_in_words(this_identifier_type.updated_at) %> ago</td>
+            <td><%= link_to 'Edit', 
+              edit_identifier_type_path(this_identifier_type), 
+              html_options = {class: 'btn btn-warning active'} %></td>
+            <td><%= link_to 'Destroy', 
+              this_identifier_type, method: :delete, class: 'btn btn-danger active',
+              data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>

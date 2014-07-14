@@ -1,31 +1,35 @@
-<h1>Listing identifiers</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Identifier type</th>
-      <th>Value</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @identifiers.each do |identifier| %>
-      <tr>
-        <td><%= identifier.user_id %></td>
-        <td><%= identifier.identifier_type_id %></td>
-        <td><%= identifier.value %></td>
-        <td><%= link_to 'Show', identifier %></td>
-        <td><%= link_to 'Edit', edit_identifier_path(identifier) %></td>
-        <td><%= link_to 'Destroy', identifier, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Identifier', new_identifier_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Index of Identifiers</h4>
+  </div>
+  <div class="panel-body">
+    <a href="/identifiers/new" class="btn btn-success active" role="button">Create New Identifier</a>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Identifier</th>
+          <th>Identifier Type</th>
+          <th>Last Updated By</th>
+          <th>Last Updated</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @identifiers.each do |this_identifier| %>
+          <tr>
+            <td><%= this_identifier.value %></td>
+            <td><%= this_identifier.identifier_type.value %></td>
+            <td><%= User.find(this_identifier.user_id).full_name %></td>
+            <td><%= time_ago_in_words(this_identifier.updated_at) %> ago</td>
+            <td><%= link_to 'Edit', 
+              edit_identifier_path(this_identifier), 
+              html_options = {class: 'btn btn-warning active'} %></td>
+            <td><%= link_to 'Destroy', 
+              this_identifier, method: :delete, class: 'btn btn-danger active',
+              data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>    
+  </div>
+</div>

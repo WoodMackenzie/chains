@@ -1,14 +1,47 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>User:</strong>
-  <%= @identifier_type.user_id %>
-</p>
-
-<p>
-  <strong>Value:</strong>
-  <%= @identifier_type.value %>
-</p>
-
-<%= link_to 'Edit', edit_identifier_type_path(@identifier_type) %> |
-<%= link_to 'Back', identifier_types_path %>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Identifier Type</h4>
+    </div>
+    <div class="panel-body">
+      <div class="form">
+        <div class="form-group">
+          <label>Identifier Type:</label>
+          <p class="form-control-static">
+            <%= @identifier_type.value %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated By:</label>
+          <p class="form-control-static">
+            <%= User.find(@identifier_type.user_id).full_name %>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Last Updated:</label>
+          <p class="form-control-static">
+            <%= time_ago_in_words(@identifier_type.updated_at) + " ago" %>
+          </p>
+        </div>
+      </div>
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <%= button_to 'Edit', edit_identifier_type_path(@identifier_type),
+            class: 'btn btn-warning active',
+            method: :get %>
+        </div> 
+        <div class="btn-group">
+          <%= button_to 'Back', identifier_types_path,
+            class: 'btn btn-primary active',
+            method: :get %>
+        </div>
+        <div class="btn-group">    
+          <%= button_to 'Destroy', @identifier_type,
+            method: :delete,
+            class: 'btn btn-danger active',
+            data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

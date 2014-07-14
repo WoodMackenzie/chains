@@ -26,6 +26,7 @@ class IdentifiersController < ApplicationController
   def create
     @identifier = Identifier.new(identifier_params)
     @identifier.user_id = current_user.id
+    @identifier.identifier_type_id = IdentifierType.where("value=?", identifier_type_params[:identifier_type_description]).first.id
 
     respond_to do |format|
       if @identifier.save
@@ -42,6 +43,7 @@ class IdentifiersController < ApplicationController
   # PATCH/PUT /identifiers/1.json
   def update
     @identifier.user_id = current_user.id
+    @identifier.identifier_type_id = IdentifierType.where("value=?", identifier_type_params[:identifier_type_description]).first.id
     
     respond_to do |format|
       if @identifier.update(identifier_params)
@@ -74,4 +76,9 @@ class IdentifiersController < ApplicationController
     def identifier_params
       params.require(:identifier).permit(:user_id, :identifier_type_id, :value)
     end
+
+    def identifier_type_params
+      params.require(:identifier).permit(:identifier_type_description)
+    end
+
 end
