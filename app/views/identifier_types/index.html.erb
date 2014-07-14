@@ -1,0 +1,29 @@
+<h1>Listing identifier_types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Value</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @identifier_types.each do |identifier_type| %>
+      <tr>
+        <td><%= identifier_type.user_id %></td>
+        <td><%= identifier_type.value %></td>
+        <td><%= link_to 'Show', identifier_type %></td>
+        <td><%= link_to 'Edit', edit_identifier_type_path(identifier_type) %></td>
+        <td><%= link_to 'Destroy', identifier_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Identifier type', new_identifier_type_path %>

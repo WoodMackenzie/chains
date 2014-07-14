@@ -1,0 +1,14 @@
+<div class="panel-body">
+  <%= simple_form_for(@identifier) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :value, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+    <%= f.input :identifier_type_id, 
+      wrapper_html: { class: 'form-group' },
+      input_html: { class: 'form-control' } %>
+    <%= f.button :submit,
+      value: "Create New Identifier",
+      class: 'btn btn-success active' %>
+  <% end %>
+</div>

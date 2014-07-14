@@ -1,5 +1,9 @@
 Chains::Application.routes.draw do
 
+  resources :identifier_types
+
+  resources :identifiers
+
   resources :project_detail_dates
 
   resources :project_categories
