@@ -9,9 +9,9 @@ class ProcessingUnitsController < ApplicationController
     # and applies the pagination in either instance.
     @processing_units = ProcessingUnit.search(params[:search])
     if @processing_units.class == Array
-      @processing_units = Kaminari.paginate_array(@processing_units).page(params[:page])
+      @processing_units = Kaminari.paginate_array(@processing_units).page(params[:page]).per(5)
     else
-      @processing_units = @processing_units.page(params[:page])
+      @processing_units = @processing_units.page(params[:page]).per(5)
     end
   end
 
